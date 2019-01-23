@@ -1,0 +1,33 @@
+.deleteSubject{
+    
+    border-right: 2px solid #c3c3c3;
+    margin: 2% 2% 2% 2%;
+}
+
+.searchSubject{
+    margin-left: 4%;
+    position: relative;
+}
+
+.appendSubject{
+    margin-top: 2%;
+}
+
+.addSubject{
+    padding-top: 4%;
+}
+
+.saveSubject{
+    padding-left: 4%;
+    padding-bottom: 4%;
+}
+
+.infoModule{
+    padding-left: 8%;
+    color: #585858;
+}
+
+.updateSubject{
+    width: 30%;
+    position: relative;
+}

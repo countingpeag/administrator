@@ -1,0 +1,55 @@
+
+.card{
+    width: 450px;
+    margin-top: 2%;
+    margin-bottom: 4%;
+    
+}
+@media screen and (max-width: 500px) {
+    .card{
+        width: 350px;
+        margin-top: 2%;
+        margin-bottom: 4%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .card{
+        width: 300px;
+        margin-top: 2%;
+        margin-bottom: 4%;
+    }
+}
+@media screen and (max-width: 320px) {
+    .card{
+        width: 280px;
+        margin-top: 2%;
+        margin-bottom: 4%;
+    }
+}
+
+.newsContent{
+    /*
+    height: 562px;
+    overflow: auto;
+    */
+
+}
+
+.addNews{
+    margin-top: 2%; 
+    margin-bottom: 1.5%; 
+}
+
+.content{
+    width: 400px;
+}
+
+.proirity{
+    width: 100px;
+}
+
+.time{
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 6%;  
+}

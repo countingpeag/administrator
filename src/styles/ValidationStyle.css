@@ -1,0 +1,40 @@
+.shadow{
+    margin-top: 2%;
+    border-radius: 7px 7px 7px 7px;
+    border: 1px solid #c3c3c3;
+    box-shadow: 10px 10px 38px -4px rgba(0,0,0,0.75);
+}
+
+.options{
+    display: flex;
+    justify-content: center;
+}
+
+.containerr{
+    display: flex;
+    justify-content: center;
+    padding-top: 1%;
+    padding-bottom: 3%;
+    padding-right: 4%;
+    padding-left: 4%;
+}
+
+.select{
+    display: flex;
+    justify-content: center;
+    padding-top: 8%;
+    width: 15%;
+}
+
+.separation{
+    padding-top: 8%;
+}
+
+.selectSpace{
+    width: 120px;
+}
+
+.searchButtonValidation{
+    margin-top: 5%;
+    position: relative;
+}

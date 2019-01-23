@@ -1,0 +1,9 @@
+  
+.profile{
+    padding-top: 6%; 
+}
+
+.ColumnCenter {
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,17 @@
+.charts{
+    padding: 5%;
+}
+
+.searchButton{
+    margin-top: 5%;
+    position: relative;
+}
+
+.square{
+    margin-top: 4%;
+    margin-bottom: 4%;
+    padding-bottom: 4%;
+    border-radius: 7px 7px 7px 7px;
+    border: 1px solid #c3c3c3;
+    box-shadow: 10px 10px 38px -4px rgba(0,0,0,0.75);
+}
