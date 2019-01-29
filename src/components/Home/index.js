@@ -27,8 +27,7 @@ class News extends Component {
         this.setState({news: newsArray});
     }
 
-    addNews(news){
-        if(this.props.addedNews){ 
+    addNews(news){ 
             let newsArray = this.state.news;
             let size = newsArray.length;
             if(size!==0)
@@ -39,7 +38,6 @@ class News extends Component {
 
             newsArray.push(news);
             this.setState({news:newsArray});
-        }
     }
 
     componentDidMount(){
@@ -53,7 +51,7 @@ class News extends Component {
     render() {
 
         const { updateNews } = this.props;
-        console.log(decode(localStorage.getItem('tokenAuth')));
+        this.state.news.sort((a,b)=>a.priority-b.priority);
         return (
             <div>
                 <NavBar />
