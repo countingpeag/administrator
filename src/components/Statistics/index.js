@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import { ColumnChart, PieChart } from 'react-chartkick';
+import ReactChartkick, { ColumnChart, PieChart } from 'react-chartkick';
 import { connect } from 'react-redux';
 import Chart from 'chart.js'; //This dependency is needed to render the charts
 import { statisticsData } from '../../actions';
@@ -102,3 +102,4 @@ const mapStateToProps = state => (
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(Statistics);
+ReactChartkick.addAdapter(Chart);
