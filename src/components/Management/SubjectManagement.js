@@ -99,7 +99,7 @@ class SubjectManagement extends Component{
         return(
             <Grid>
                 <Row>
-                    <Col xs={12} md={4} className="deleteSubject">
+                    <Col xs={12} md={4} className="subjectLine">
                         <Row center="xs">
                             <h2>Actualizar Materia</h2>
                         </Row>

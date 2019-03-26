@@ -360,3 +360,25 @@ export const addSubject = payload => {
         });
     };
 };
+
+
+
+//Teacher Actions
+export const SEARCH_TEACHER_NAME = "SEARCH_TEACHER_NAME";
+export const GET_SPECIALITIES_INFO = "GET_SPECIALITIES_INFO";
+export const GET_SUBJECTS_INFO = "GET_SUBJECTS_INFO";
+export const SUBMIT_TEACHER_DATA = "SUBMIT_TEACHER_DATA";
+
+const searchByName = payload => ({type: SEARCH_TEACHER_NAME, payload: payload});
+
+export const searchTeacherInfo = payload => {
+    return dispatch => {
+        axios.get(`http://localhost:8080/nucleus/teacher/getTeacher/${payload}`)
+        .then( ({data}) => {
+            dispatch(searchByName(data));
+        })
+        .catch( error => {
+            console.log(error);
+        })
+    };
+};

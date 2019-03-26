@@ -1,0 +1,22 @@
+.teacherLine{
+    border-right: 2px solid #c3c3c3;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.buttonSpace{
+    padding-top: 5%;
+    padding-left: 3%;
+}
+
+.color1{
+    background-color: indianred;
+}
+
+.formControl{
+    width: 80%;
+}
+
+.teacherContent{
+    padding-left: 6%;
+}
