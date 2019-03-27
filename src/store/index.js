@@ -22,7 +22,8 @@ const initialState = {
     studentInfo: {idSpeciality:{}},
     searchSubject: false,
     updateSubject: false,
-    addSubject: false
+    addSubject: false,
+    teacherInfo: {teacherName: "", teacherLastName:"", teacherRFC:"", teacherGenre:"" ,idInstitute:{instituteName:""}, specialities:[], subjects: []}
 
 }
 

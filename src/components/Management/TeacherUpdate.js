@@ -34,7 +34,6 @@ class TeacherUpdate extends Component{
 
     render(){
         const { teacherInfo } = this.props;
-        console.log(teacherInfo);
         return(
             <Grid>
                 <Row>
@@ -45,7 +44,7 @@ class TeacherUpdate extends Component{
                         <Row center="xs">
                             <Col>
                                 <TextField
-                                    id="nameFind"
+                                    id="teacher"
                                     label="Nombre"
                                     placeholder="Profesor"
                                     margin="normal"
@@ -64,7 +63,7 @@ class TeacherUpdate extends Component{
                             <h3>Nombre:
                                 <Input
                                     id="updateName"
-                                    value={""}
+                                    value={` ${teacherInfo.teacherName}`}
                                     inputProps={{'aria-label': 'Description'}}
                                     onChange={this.handleChange}
                                 />
@@ -72,7 +71,7 @@ class TeacherUpdate extends Component{
                             <h3>Apellidos
                                 <Input
                                     id="updateName"
-                                    value={""}
+                                    value={` ${teacherInfo.teacherLastName}`}
                                     inputProps={{'aria-label': 'Description'}}
                                     onChange={this.handleChange}
                                 />
@@ -80,7 +79,7 @@ class TeacherUpdate extends Component{
                             <h3>RFC:
                                 <Input
                                     id="updateName"
-                                    value={""}
+                                    value={` ${teacherInfo.teacherRFC}`}
                                     inputProps={{'aria-label': 'Description'}}
                                     onChange={this.handleChange}
                                 />
@@ -88,16 +87,16 @@ class TeacherUpdate extends Component{
                             <h3>Instituto:
                                 <Input
                                     id="updateName"
-                                    value={""}
+                                    value={` ${teacherInfo.idInstitute.instituteName}`}
                                     inputProps={{'aria-label': 'Description'}}
                                     onChange={this.handleChange}
                                 />
                             </h3>
-                            <h3>Genero: Hombre</h3>
+                            <h3>Genero: {` ${teacherInfo.teacherGenre}`}</h3>
                         </div>
                         <Row center="xs">
-                            <TeacherSpecialtyAggregations />
-                            <TeacherSubjectAggregations />
+                            <TeacherSpecialtyAggregations specialities={teacherInfo.specialities}/>
+                            <TeacherSubjectAggregations subjects={teacherInfo.subjects}/>
                         </Row>
                         <Row center="xs">
                             <Button variant="contained" color="secondary" onClick={this.handleSubmit}>
