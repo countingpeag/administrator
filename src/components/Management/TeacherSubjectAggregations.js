@@ -13,12 +13,9 @@ class TeacherSubjectAggregations extends Component {
         super();
 
         this.state = {
-            value:'',
-            subjectsToSend: []
+            value:''
         };
         this.handleChange = this.handleChange.bind(this);
-        this.handleAdd = this.handleAdd.bind(this);
-        this.handleRemove = this.handleRemove.bind(this);
     }
 
     handleChange(event){
@@ -26,26 +23,9 @@ class TeacherSubjectAggregations extends Component {
         this.setState({value});
     }
 
-    handleAdd(subject){
-        if(subject!==undefined){
-            let array = this.state.subjectsToSend.filter(element => element!==subject);
-            array.push(subject);
-            this.setState({subjectsToSend:array});
-        }
-    }
-
-    handleRemove(subject){
-        let array = this.state.subjectsToSend.filter(element => element!==subject);
-        this.setState({subjectsToSend:array});
-    }
-
-    componentWillReceiveProps(props){
-        this.setState({subjectsToSend:props.subjects});
-    }
-
     render(){
-        const { subjects } = this.props;
-        const { value, subjectsToSend } = this.state;
+        const { subjects, allSubjects, addSubject, removeSubject } = this.props;
+        const { value } = this.state;
         return(
             <Grid>
                 <Row>
@@ -57,7 +37,7 @@ class TeacherSubjectAggregations extends Component {
                                     <em>None</em>
                                 </MenuItem>
                                 {
-                                    subjects.map(item => (
+                                    allSubjects.map(item => (
                                         <MenuItem key={item.subjectKeyCode} value={item.subjectKeyCode} >
                                             {item.subjectName}
                                         </MenuItem>
@@ -67,7 +47,7 @@ class TeacherSubjectAggregations extends Component {
                         </FormControl>
                     </Col>
                     <Col xs={6}>
-                        <Button variant="contained" color="primary" onClick={() => this.handleAdd(subjects.find(item => item.subjectKeyCode===value))}>
+                        <Button variant="contained" color="primary" onClick={() => addSubject(allSubjects.find(item => item.subjectKeyCode===value))}>
                             Agregar Materia
                         </Button>
                     </Col>
@@ -75,11 +55,11 @@ class TeacherSubjectAggregations extends Component {
                 <Row className="teacherContent">
                     <ul>
                         {
-                            subjectsToSend.map(subject => (
+                            subjects.map(subject => (
                                 <li key={subject.subjectKeyCode}>
                                     <Chip 
                                         label={subject.subjectName}
-                                        onDelete={() => this.handleRemove(subject)}
+                                        onDelete={() => removeSubject(subject)}
                                         color="primary"  
                                         variant="outlined"
                                     />

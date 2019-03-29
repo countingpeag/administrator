@@ -375,7 +375,8 @@ export const searchTeacherInfo = payload => {
     return dispatch => {
         axios.get(`http://localhost:8080/nucleus/teacher/getTeacher/${payload}`)
         .then( ({data}) => {
-            dispatch(searchByName(data));
+            if(data!=="")
+                dispatch(searchByName(data));
         })
         .catch( error => {
             console.log(error);

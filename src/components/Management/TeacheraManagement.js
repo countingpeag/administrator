@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
-import { searchTeacherInfo } from '../../actions';
+import { searchTeacherInfo, getData } from '../../actions';
 import TeacherUpdate from './TeacherUpdate';
 import '../../styles/TeacherStyle.css';
 
 class TeacherManagement extends Component{
 
+    componentWillReceiveProps(props){
+        props.speciSubjectsData();
+    }
 
     render(){
-
         const { searchTeacher, teacherInfo } = this.props;
         return(
             <Grid>
@@ -31,7 +33,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    searchTeacher: value => dispatch(searchTeacherInfo(value))
+    searchTeacher: value => dispatch(searchTeacherInfo(value)),
+    speciSubjectsData: () => dispatch(getData())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeacherManagement);

@@ -13,39 +13,18 @@ class TeacherSpecialtyAggregations extends Component {
         super();
         this.state = {
             value: '',
-            specialitiesToSend: []
         };
         this.handleChange = this.handleChange.bind(this);
-        this.handleAdd = this.handleAdd.bind(this);
-        this.handleRemove = this.handleRemove.bind(this);
     }
-
     
     handleChange(event){
         const {value} = event.target;
         this.setState({value});
     }
 
-    handleAdd(specialty){
-        if(specialty!==undefined){
-            let array = this.state.specialitiesToSend.filter(element => element!==specialty);
-            array.push(specialty);
-            this.setState({specialitiesToSend:array});
-        }
-    }
-
-    handleRemove(specialty){
-        let array = this.state.specialitiesToSend.filter(element => element!==specialty);
-        this.setState({specialitiesToSend:array});
-    }
-
-    componentWillReceiveProps(props){
-        this.setState({specialitiesToSend:props.specialities});
-    }
-
     render(){
-        const { specialities } = this.props;
-        const { value, specialitiesToSend } = this.state;
+        const { specialities, allSpecialities, addSpecialty, removeSpecialty } = this.props;
+        const { value } = this.state;
         return(
             <Grid>
                 <Row>
@@ -57,7 +36,7 @@ class TeacherSpecialtyAggregations extends Component {
                                     <em>None</em>
                                 </MenuItem>
                                 {
-                                    specialities.map(item => (
+                                    allSpecialities.map(item => (
                                         <MenuItem key={item.specialityKeycode} value={item.specialityKeycode} >
                                             {item.specialityName}
                                         </MenuItem>
@@ -67,7 +46,7 @@ class TeacherSpecialtyAggregations extends Component {
                         </FormControl>
                     </Col>
                     <Col xs={6}>
-                        <Button variant="contained" color="primary" onClick={() => this.handleAdd(specialities.find(item => item.specialityKeycode===value))}>
+                        <Button variant="contained" color="primary" onClick={() => addSpecialty(allSpecialities.find(item => item.specialityKeycode===value))}>
                             Agregar Especialidad
                         </Button>
                     </Col>
@@ -75,11 +54,11 @@ class TeacherSpecialtyAggregations extends Component {
                 <Row className="teacherContent">
                     <ul>
                         {
-                            specialitiesToSend.map(specialty => (
+                            specialities.map(specialty => (
                                 <li key={specialty.specialityKeycode}>
                                     <Chip 
                                         label={specialty.specialityName}
-                                        onDelete={() => this.handleRemove(specialty)}
+                                        onDelete={() => removeSpecialty(specialty)}
                                         color="primary"  
                                         variant="outlined"
                                     />

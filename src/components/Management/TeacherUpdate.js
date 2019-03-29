@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
@@ -11,29 +12,95 @@ class TeacherUpdate extends Component{
     constructor(){
         super();
         this.state = {
-           nameToSearch: ''
+           rfcToSearch: '',
+           updateName: '',
+           updateLastname: '',
+           updateRFC: '',
+           updateInstitute: '',
+           specialitiesToUpdate: [],
+           subjectsToUpdate: []
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.handleAdd = this.handleAdd.bind(this);
+        this.handleRemove = this.handleRemove.bind(this);
     }
 
     handleChange(event){
-        const {value} = event.target;
-        this.setState({nameToSearch:value});
+        const {value, id} = event.target;
+        if(id==="teacherRFC")
+            this.setState({rfcToSearch:value});
+        else if(id==="updateName")
+            this.setState({updateName:value});
+        else if(id==="updateLastname")
+            this.setState({updateLastname:value});
+        else if(id==="updateRFC")
+            this.setState({updateRFC:value});
+        else if(id==="updateInstitute")
+            this.setState({updateInstitute:value});
+    }
+
+    handleAdd(obj){
+        if(obj!==undefined){
+            if(obj.subjectKeyCode!==undefined){
+                let array = this.state.subjectsToUpdate.filter(element => element.subjectKeyCode!==obj.subjectKeyCode);
+                array.push(obj);
+                this.setState({subjectsToUpdate:array});
+            }
+            else{
+                let array = this.state.specialitiesToUpdate.filter(element => element.specialityKeycode!==obj.specialityKeycode);
+                array.push(obj);
+                this.setState({specialitiesToUpdate:array});
+            }
+        }
+    }
+
+    handleRemove(obj){
+        if(obj!==undefined){
+            if(obj.subjectKeyCode!==undefined){
+                let array = this.state.subjectsToUpdate.filter(element => element!==obj);
+                this.setState({subjectsToUpdate:array});
+            }
+            else{
+                let array = this.state.specialitiesToUpdate.filter(element => element!==obj);
+                this.setState({specialitiesToUpdate:array});
+            }
+        }
     }
 
     handleSubmit(){
-        console.log(this.state.nameToSearch.trim());
+        const { updateName, updateLastname, updateRFC, updateInstitute, specialitiesToUpdate, subjectsToUpdate } = this.state;
+        
+        console.log(this.props.teacherInfo, "v1");
+        this.props.teacherInfo.teacherName = updateName;
+        this.props.teacherInfo.teacherLastName = updateLastname;
+        this.props.teacherInfo.teacherRFC = updateRFC;
+        this.props.teacherInfo.idInstitute.instituteName = updateInstitute;
+        this.props.teacherInfo.specialities = specialitiesToUpdate;
+        this.props.teacherInfo.subjects = subjectsToUpdate
+        console.log(this.props.teacherInfo, "v2");
     }
 
     handleSearch(){
-        this.props.searchTeacher(this.state.nameToSearch);
+        this.props.searchTeacher(this.state.rfcToSearch.trim());
+    }
+
+    componentWillReceiveProps(props){
+        this.setState({
+            updateName: props.teacherInfo.teacherName,
+            updateLastname: props.teacherInfo.teacherLastName,
+            updateRFC: props.teacherInfo.teacherRFC,
+            updateInstitute: props.teacherInfo.idInstitute.instituteName,
+            specialitiesToUpdate: props.teacherInfo.specialities,
+            subjectsToUpdate: props.teacherInfo.subjects
+        });
     }
 
     render(){
-        const { teacherInfo } = this.props;
+        const { teacherInfo, schoolData } = this.props;
+        const { specialitiesToUpdate, subjectsToUpdate, updateName, updateLastname, updateRFC, updateInstitute } = this.state;
         return(
             <Grid>
                 <Row>
@@ -44,8 +111,8 @@ class TeacherUpdate extends Component{
                         <Row center="xs">
                             <Col>
                                 <TextField
-                                    id="teacher"
-                                    label="Nombre"
+                                    id="teacherRFC"
+                                    label="RFC"
                                     placeholder="Profesor"
                                     margin="normal"
                                     variant="outlined"
@@ -60,34 +127,34 @@ class TeacherUpdate extends Component{
                         </Row>
                         <div className="teacherContent">
                             <h3>id: {teacherInfo.idTeacher}</h3>
-                            <h3>Nombre:
+                            <h3>Nombre: 
                                 <Input
                                     id="updateName"
-                                    value={` ${teacherInfo.teacherName}`}
+                                    value={`${updateName}`}
                                     inputProps={{'aria-label': 'Description'}}
                                     onChange={this.handleChange}
                                 />
                             </h3>
-                            <h3>Apellidos
+                            <h3>Apellidos:
                                 <Input
-                                    id="updateName"
-                                    value={` ${teacherInfo.teacherLastName}`}
+                                    id="updateLastname"
+                                    value={`${updateLastname}`}
                                     inputProps={{'aria-label': 'Description'}}
                                     onChange={this.handleChange}
                                 />
                             </h3>
                             <h3>RFC:
                                 <Input
-                                    id="updateName"
-                                    value={` ${teacherInfo.teacherRFC}`}
+                                    id="updateRFC"
+                                    value={`${updateRFC}`}
                                     inputProps={{'aria-label': 'Description'}}
                                     onChange={this.handleChange}
                                 />
                             </h3>
                             <h3>Instituto:
                                 <Input
-                                    id="updateName"
-                                    value={` ${teacherInfo.idInstitute.instituteName}`}
+                                    id="updateInstitute"
+                                    value={`${updateInstitute}`}
                                     inputProps={{'aria-label': 'Description'}}
                                     onChange={this.handleChange}
                                 />
@@ -95,8 +162,8 @@ class TeacherUpdate extends Component{
                             <h3>Genero: {` ${teacherInfo.teacherGenre}`}</h3>
                         </div>
                         <Row center="xs">
-                            <TeacherSpecialtyAggregations specialities={teacherInfo.specialities}/>
-                            <TeacherSubjectAggregations subjects={teacherInfo.subjects}/>
+                            <TeacherSpecialtyAggregations specialities={specialitiesToUpdate} allSpecialities={schoolData.specialities} addSpecialty={this.handleAdd} removeSpecialty={this.handleRemove} />
+                            <TeacherSubjectAggregations subjects={subjectsToUpdate} allSubjects={schoolData.subjects} addSubject={this.handleAdd} removeSubject={this.handleRemove} />
                         </Row>
                         <Row center="xs">
                             <Button variant="contained" color="secondary" onClick={this.handleSubmit}>
@@ -110,4 +177,8 @@ class TeacherUpdate extends Component{
     }
 }
 
-export default TeacherUpdate;
+const mapStateToProps = state => ({
+    schoolData: state.StatisticsformData
+});
+
+export default connect(mapStateToProps,null)(TeacherUpdate);
