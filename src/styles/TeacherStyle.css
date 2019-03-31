@@ -13,10 +13,18 @@
     background-color: indianred;
 }
 
+.color2{
+    background-color:lightgreen;
+}
+
 .formControl{
     width: 80%;
 }
 
 .teacherContent{
     padding-left: 6%;
+}
+
+.teacherGenre{
+    width: 18%;
 }

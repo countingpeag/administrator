@@ -72,15 +72,15 @@ class TeacherUpdate extends Component{
 
     handleSubmit(){
         const { updateName, updateLastname, updateRFC, updateInstitute, specialitiesToUpdate, subjectsToUpdate } = this.state;
-        
-        console.log(this.props.teacherInfo, "v1");
-        this.props.teacherInfo.teacherName = updateName;
-        this.props.teacherInfo.teacherLastName = updateLastname;
-        this.props.teacherInfo.teacherRFC = updateRFC;
-        this.props.teacherInfo.idInstitute.instituteName = updateInstitute;
-        this.props.teacherInfo.specialities = specialitiesToUpdate;
-        this.props.teacherInfo.subjects = subjectsToUpdate
-        console.log(this.props.teacherInfo, "v2");
+        const { updateTecher, teacherInfo} = this.props;
+        teacherInfo.teacherName = updateName;
+        teacherInfo.teacherLastName = updateLastname;
+        teacherInfo.teacherRFC = updateRFC;
+        teacherInfo.idInstitute.instituteName = updateInstitute;
+        teacherInfo.specialities = specialitiesToUpdate;
+        teacherInfo.subjects = subjectsToUpdate
+
+        updateTecher(teacherInfo);
     }
 
     handleSearch(){
@@ -151,14 +151,7 @@ class TeacherUpdate extends Component{
                                     onChange={this.handleChange}
                                 />
                             </h3>
-                            <h3>Instituto:
-                                <Input
-                                    id="updateInstitute"
-                                    value={`${updateInstitute}`}
-                                    inputProps={{'aria-label': 'Description'}}
-                                    onChange={this.handleChange}
-                                />
-                            </h3>
+                            <h3>Instituto: {`${updateInstitute}`} </h3>
                             <h3>Genero: {` ${teacherInfo.teacherGenre}`}</h3>
                         </div>
                         <Row center="xs">

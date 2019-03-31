@@ -8,7 +8,7 @@ import { fileResponse, fileRequest } from './Files';
 import { validationStudentsData, validationOptionsData, sentStudentsValidation, searchStudentsValidation} from './Validation';
 import { searchStudent, studentInfo, deleteStudent, deleteResponse } from './Students';
 import { searchSubject, subjectInfo, updateSubject, updateSubjectResponse, addSubject, addSubjectResponse } from './Subjects';
-import { teacherInfo } from './TeacherReducer';
+import { teacherInfo, updateTeacher } from './TeacherReducer';
 
 export default combineReducers({
     changedPassword,
@@ -39,5 +39,6 @@ export default combineReducers({
     updateSubjectResponse,
     addSubject,
     addSubjectResponse,
-    teacherInfo
+    teacherInfo,
+    updateTeacher
 }); 

@@ -365,15 +365,14 @@ export const addSubject = payload => {
 
 //Teacher Actions
 export const SEARCH_TEACHER_NAME = "SEARCH_TEACHER_NAME";
-export const GET_SPECIALITIES_INFO = "GET_SPECIALITIES_INFO";
-export const GET_SUBJECTS_INFO = "GET_SUBJECTS_INFO";
-export const SUBMIT_TEACHER_DATA = "SUBMIT_TEACHER_DATA";
+export const UPDATE_TEACHER_DATA = "UPDATE_TEACHER_DATA";
 
 const searchByName = payload => ({type: SEARCH_TEACHER_NAME, payload: payload});
+const updateTeacher = payload => ({type: UPDATE_TEACHER_DATA, payload:payload});
 
 export const searchTeacherInfo = payload => {
     return dispatch => {
-        axios.get(`http://localhost:8080/nucleus/teacher/getTeacher/${payload}`)
+        axios.get(`http://localhost:8080/nucleus/teacher/getTeacher/${payload}/${localStorage.getItem("tokenAuth")}`)
         .then( ({data}) => {
             if(data!=="")
                 dispatch(searchByName(data));
@@ -381,5 +380,17 @@ export const searchTeacherInfo = payload => {
         .catch( error => {
             console.log(error);
         })
+    };
+};
+
+export const saveOrupdateTecher = payload => {
+    return dispatch => {
+        axios.put(`http://localhost:8080/nucleus/teacher/saveorupdateTeacher/${localStorage.getItem("tokenAuth")}`, payload)
+        .then( ({data}) => {
+            dispatch(updateTeacher(data));
+        })
+        .catch( error => {
+            console.log(error);
+        });
     };
 };
