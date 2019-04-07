@@ -10,3 +10,25 @@
 ul{
     list-style-type: none;
 }
+
+.limit1{
+    position: relative;
+    overflow: auto;
+    flex: 1;
+    height: 310px;
+}
+
+.limit2{
+    position: relative;
+    overflow: auto;
+    flex: 1;
+    height: 310px;
+    margin-bottom: 10%;
+}
+
+#limitTen{
+    height: 730px;
+    position: relative;
+    overflow: auto;
+    flex: 1;
+}
