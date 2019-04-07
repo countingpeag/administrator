@@ -163,7 +163,7 @@ class SubjectManagement extends Component{
                             <Col xs={6} md={4}>
                                 <TextField
                                 id="level"
-                                label="Nivel"
+                                label="Semestre"
                                 placeholder="Semestre de la materia"
                                 margin="normal"
                                 variant="outlined"
