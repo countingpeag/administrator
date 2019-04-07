@@ -3,6 +3,10 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import DroppableDetailed from '../Util/Droppable';
 import Button from '@material-ui/core/Button';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+
+
 
 // fake data generator
 const getItems = (count, offset = 0) =>
@@ -219,6 +223,32 @@ class CandidatesManagement extends Component {
         }
     };
 
+    demoFromHTML() {
+
+        const columns = [
+        {title: "ID", dataKey: "id"},
+        {title: "Name", dataKey: "name"},
+        {title: "Country", dataKey: "country"},
+        ];
+        const rows = [
+        {"id": 1, "name": "Shaw", "country": "Tanzania"},
+        {"id": 2, "name": "Nelson", "country": "Kazakhstan"},
+        {"id": 3, "name": "Garcia", "country": "Madagascar"},
+        ];
+        
+        var doc = new jsPDF('p', 'pt');
+        doc.autoTable(columns, rows, {
+            styles: {fillColor: [100, 255, 255]},
+                columnStyles: {
+                id: {fillColor: 255}
+            },
+            margin: {top: 60},
+            addPageContent: function(data) {
+                doc.text("Esto es una prueba de lo que puede contener un reporte", 40, 30);
+            }
+        });
+        doc.save('test.pdf');
+        }
     // Normally you would want to split things out into separate components.
     // But in this example everything is just done in one place for simplicity
     render() {
@@ -288,7 +318,7 @@ class CandidatesManagement extends Component {
                                             </Button>
                                         </Col>
                                         <Col xs={4}>
-                                            <Button variant="contained" color="secondary">
+                                            <Button variant="contained" color="secondary" onClick={() => this.demoFromHTML()}>
                                                 PDF
                                             </Button>
                                         </Col>
