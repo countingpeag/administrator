@@ -16,7 +16,8 @@ class TeacherAppend extends Component{
         super();
         this.state = {
             teacherName: '',
-            teacherLastname: '',
+            teacherLastnameFather: '',
+            teacherLastnameMother: '',
             teacherUsername: '',
             teacherRFC: '',
             teacherInstitute: '',
@@ -35,8 +36,10 @@ class TeacherAppend extends Component{
         const { id, value, name } = event.target;
         if(id==="teacherName")
             this.setState({teacherName:value});
-        else if(id==="teacherLastname")
-            this.setState({teacherLastname:value});
+        else if(id==="teacherLastnameFather")
+            this.setState({teacherLastnameFather:value});
+        else if(id==="teacherLastnameMother")
+            this.setState({teacherLastnameMother:value});
         else if(id==="teacherUsername")
             this.setState({teacherUsername:value});
         else if(id==="teacherRFC")
@@ -76,10 +79,11 @@ class TeacherAppend extends Component{
     }
 
     handleSubmit(){
-        const { specialities, subjects, teacherName, teacherLastname, teacherUsername, teacherRFC, teacherInstitute, teacherGenre } = this.state;
+        const { specialities, subjects, teacherName, teacherLastnameFather, teacherLastnameMother, teacherUsername, teacherRFC, teacherInstitute, teacherGenre } = this.state;
         let teacher = {
             teacherName,
-            teacherLastName:teacherLastname,
+            teacherLastNameFather:teacherLastnameFather,
+            teacherLastNameMother:teacherLastnameMother,
             teacherUsername,
             teacherPassword:teacherRFC,
             teacherGenre,
@@ -102,7 +106,7 @@ class TeacherAppend extends Component{
     }
 
     render(){
-        const { specialities, subjects, teacherName, teacherLastname, teacherUsername, teacherRFC, teacherInstitute, teacherGenre } = this.state;
+        const { specialities, subjects, teacherName, teacherLastnameFather, teacherLastnameMother, teacherUsername, teacherRFC, teacherInstitute, teacherGenre } = this.state;
         const { schoolData } = this.props;
         
         return(
@@ -122,10 +126,18 @@ class TeacherAppend extends Component{
                                             onChange={this.handleChange}
                                         />
                                     </h3>
-                                    <h3>Apellidos:
+                                    <h3>Apellido Paterno:
                                         <Input
-                                            id="teacherLastname"
-                                            value={`${teacherLastname}`}
+                                            id="teacherLastnameFather"
+                                            value={`${teacherLastnameFather}`}
+                                            inputProps={{'aria-label': 'Description'}}
+                                            onChange={this.handleChange}
+                                        />
+                                    </h3>
+                                    <h3>Apellido Materno:
+                                        <Input
+                                            id="teacherLastnameMother"
+                                            value={`${teacherLastnameMother}`}
                                             inputProps={{'aria-label': 'Description'}}
                                             onChange={this.handleChange}
                                         />

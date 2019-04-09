@@ -14,7 +14,8 @@ class TeacherUpdate extends Component{
         this.state = {
            rfcToSearch: '',
            updateName: '',
-           updateLastname: '',
+           updateLastnameFather: '',
+           updateLastnameMother: '',
            updateRFC: '',
            updateInstitute: '',
            specialitiesToUpdate: [],
@@ -34,8 +35,10 @@ class TeacherUpdate extends Component{
             this.setState({rfcToSearch:value});
         else if(id==="updateName")
             this.setState({updateName:value});
-        else if(id==="updateLastname")
-            this.setState({updateLastname:value});
+        else if(id==="updateLastnameFather")
+            this.setState({updateLastnameFather:value});
+        else if(id==="updateLastnameMother")
+            this.setState({updateLastnameMother:value});
         else if(id==="updateRFC")
             this.setState({updateRFC:value});
         else if(id==="updateInstitute")
@@ -71,10 +74,11 @@ class TeacherUpdate extends Component{
     }
 
     handleSubmit(){
-        const { updateName, updateLastname, updateRFC, updateInstitute, specialitiesToUpdate, subjectsToUpdate } = this.state;
+        const { updateName, updateLastnameFather, updateLastnameMother, updateRFC, updateInstitute, specialitiesToUpdate, subjectsToUpdate } = this.state;
         const { updateTecher, teacherInfo} = this.props;
         teacherInfo.teacherName = updateName;
-        teacherInfo.teacherLastName = updateLastname;
+        teacherInfo.teacherLastNameFather = updateLastnameFather;
+        teacherInfo.teacherLastNameMother = updateLastnameMother;
         teacherInfo.teacherRFC = updateRFC;
         teacherInfo.idInstitute.instituteName = updateInstitute;
         teacherInfo.specialities = specialitiesToUpdate;
@@ -100,7 +104,7 @@ class TeacherUpdate extends Component{
 
     render(){
         const { teacherInfo, schoolData } = this.props;
-        const { specialitiesToUpdate, subjectsToUpdate, updateName, updateLastname, updateRFC, updateInstitute } = this.state;
+        const { specialitiesToUpdate, subjectsToUpdate, updateName, updateLastnameFather, updateLastnameMother, updateRFC, updateInstitute } = this.state;
         return(
             <Grid>
                 <Row>
@@ -135,10 +139,18 @@ class TeacherUpdate extends Component{
                                     onChange={this.handleChange}
                                 />
                             </h3>
-                            <h3>Apellidos:
+                            <h3>Apellido Paterno:
                                 <Input
-                                    id="updateLastname"
-                                    value={`${updateLastname}`}
+                                    id="updateLastnameFather"
+                                    value={`${updateLastnameFather}`}
+                                    inputProps={{'aria-label': 'Description'}}
+                                    onChange={this.handleChange}
+                                />
+                            </h3>
+                            <h3>Apellido Materno:
+                                <Input
+                                    id="updateLastnameMother"
+                                    value={`${updateLastnameMother}`}
                                     inputProps={{'aria-label': 'Description'}}
                                     onChange={this.handleChange}
                                 />
