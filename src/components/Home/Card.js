@@ -110,10 +110,10 @@ class Cards extends React.Component {
           <CardHeader
             avatar={
               <Avatar aria-label="Recipe" className={classes.avatar}>
-                {data.administrator.adminName[0]+data.administrator.adminLastName[0]}
+                {data.administrator.adminName[0]+data.administrator.adminLastNameFather[0]}
               </Avatar>
             }
-            title={data.administrator.adminName+" "+data.administrator.adminLastName}
+            title={data.administrator.adminName+" "+data.administrator.adminLastNameFather+" "+data.administrator.adminLastNameMother}
             subheader={  new Date(data.date).getDate() + "/" + (new Date(data.date).getMonth()+1) +  "/" + new Date(data.date).getFullYear() 
                       + " " + new Date(data.date).getHours() + ":" + new Date(data.date).getMinutes() + ":" + new Date(data.date).getSeconds()}
             
