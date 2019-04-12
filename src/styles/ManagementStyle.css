@@ -7,23 +7,14 @@
     box-shadow: 10px 10px 38px -4px rgba(0,0,0,0.75);
 }
 
+#CandidatesTab{
+    margin-top: 4%;
+    margin-bottom: 4%;
+    
+}
+
 ul{
     list-style-type: none;
-}
-
-.limit1{
-    position: relative;
-    overflow: auto;
-    flex: 1;
-    height: 310px;
-}
-
-.limit2{
-    position: relative;
-    overflow: auto;
-    flex: 1;
-    height: 310px;
-    margin-bottom: 10%;
 }
 
 #limitTen{
@@ -31,4 +22,10 @@ ul{
     position: relative;
     overflow: auto;
     flex: 1;
+}
+
+.specialitiesTab{
+    margin-top: 5%;
+    overflow: auto;
+    height: 600px;
 }

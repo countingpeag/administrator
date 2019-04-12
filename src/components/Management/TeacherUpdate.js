@@ -92,9 +92,11 @@ class TeacherUpdate extends Component{
     }
 
     componentWillReceiveProps(props){
+        console.log(props.teacherInfo)
         this.setState({
             updateName: props.teacherInfo.teacherName,
-            updateLastname: props.teacherInfo.teacherLastName,
+            updateLastnameFather: props.teacherInfo.teacherLastNameFather,
+            updateLastnameMother: props.teacherInfo.teacherLastNameMother,
             updateRFC: props.teacherInfo.teacherRFC,
             updateInstitute: props.teacherInfo.idInstitute.instituteName,
             specialitiesToUpdate: props.teacherInfo.specialities,

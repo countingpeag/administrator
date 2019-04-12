@@ -23,7 +23,7 @@ const initialState = {
     searchSubject: false,
     updateSubject: false,
     addSubject: false,
-    teacherInfo: {teacherName: "", teacherLastName:"", teacherRFC:"", teacherGenre:"" ,idInstitute:{instituteName:""}, specialities:[], subjects: []}
+    teacherInfo: {teacherName: "", teacherLastNameFather:"", teacherLastNameMother:"", teacherRFC:"", teacherGenre:"" ,idInstitute:{instituteName:""}, specialities:[], subjects: []}
 
 }
 

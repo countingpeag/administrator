@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import DroppableDetailed from '../Util/Droppable';
+import CandidatesTab from './CandidatesTab';
 import Button from '@material-ui/core/Button';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
@@ -267,64 +268,7 @@ class CandidatesManagement extends Component {
                             </Row>
                         </Col>
                         <Col xs={9}>
-                            <Row>
-                                <Col xs={4}>
-                                    <Row center="xs">
-                                        <h2>ELECTRÓNICA</h2>
-                                    </Row>
-                                    <Row center="xs"className="limit1">
-                                        <DroppableDetailed getItemStyle={getItemStyle} getListStyle={getListStyle} items={this.state.selected1} droppableId="droppable2" />
-                                    </Row>
-                                </Col>
-                                <Col xs={4}>
-                                    <Row center="xs">
-                                        <h2>LABORATORIO CLINICO</h2>
-                                    </Row>
-                                    <Row center="xs"className="limit1">
-                                        <DroppableDetailed getItemStyle={getItemStyle} getListStyle={getListStyle} items={this.state.selected2} droppableId="droppable3" />
-                                    </Row>
-                                </Col>
-                                <Col xs={4}>
-                                    <Row center="xs">
-                                        <h2>LABORATORISTA QUÍMICO</h2>
-                                    </Row>
-                                    <Row center="xs"className="limit1">
-                                        <DroppableDetailed getItemStyle={getItemStyle} getListStyle={getListStyle} items={this.state.selected3} droppableId="droppable4" />
-                                    </Row>
-                                </Col>
-                            </Row>
-                            <Row center="xs" middle="xs">
-                                <Col xs={4}>
-                                    <Row center="xs">
-                                        <h2>MANTENIMIENTO AUTOMOTRIZ</h2>
-                                    </Row>
-                                    <Row center="xs"className="limit2">
-                                        <DroppableDetailed getItemStyle={getItemStyle} getListStyle={getListStyle} items={this.state.selected4} droppableId="droppable5" />
-                                    </Row>
-                                </Col>
-                                <Col xs={4}>
-                                    <Row center="xs">
-                                        <h2>MANTENIMIENTO AUTOMOTRIZ</h2>
-                                    </Row>
-                                    <Row center="xs"className="limit2">
-                                        <DroppableDetailed getItemStyle={getItemStyle} getListStyle={getListStyle} items={this.state.selected5} droppableId="droppable6" />
-                                    </Row>
-                                </Col>
-                                <Col xs={4}>
-                                    <Row center="xs">
-                                        <Col xs={4}>                                
-                                            <Button variant="contained" color="primary">
-                                                Guardar
-                                            </Button>
-                                        </Col>
-                                        <Col xs={4}>
-                                            <Button variant="contained" color="secondary" onClick={() => this.demoFromHTML()}>
-                                                PDF
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </Col>
-                            </Row>
+                            <CandidatesTab getItemStyle={getItemStyle} getListStyle={getListStyle} data={this.state}/>
                         </Col>
                     </Row>
                 </Grid>
