@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import DroppableDetailed from '../Util/Droppable';
+import DrappableContainer from './DrappableContainer';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -51,11 +52,11 @@ class CandidatesTab extends Component {
                                 <Tab label="LABORATORISTA CLÍNICO" />
                             </Tabs>
                         </AppBar>
-                        {value === 0 && <DroppableDetailed getItemStyle={getItemStyle} getListStyle={getListStyle} items={data.selected1} droppableId="droppable2" />}
-                        {value === 1 && <DroppableDetailed getItemStyle={getItemStyle} getListStyle={getListStyle} items={data.selected2} droppableId="droppable3" />}
-                        {value === 2 && <DroppableDetailed getItemStyle={getItemStyle} getListStyle={getListStyle} items={data.selected3} droppableId="droppable4" />}
-                        {value === 3 && <DroppableDetailed getItemStyle={getItemStyle} getListStyle={getListStyle} items={data.selected4} droppableId="droppable5" />}
-                        {value === 4 && <DroppableDetailed getItemStyle={getItemStyle} getListStyle={getListStyle} items={data.selected5} droppableId="droppable6" />}
+                        {value === 0 && <DrappableContainer getItemStyle={getItemStyle} getListStyle={getListStyle} morning={data.morning1} afternoon={data.afternoon1}  droppableMorning="droppable1" droppableAfternoon="droppable6"/>}
+                        {value === 1 && <DrappableContainer getItemStyle={getItemStyle} getListStyle={getListStyle} morning={data.morning2} afternoon={data.afternoon2}  droppableMorning="droppable2" droppableAfternoon="droppable7"/>}
+                        {value === 2 && <DrappableContainer getItemStyle={getItemStyle} getListStyle={getListStyle} morning={data.morning3} afternoon={data.afternoon3}  droppableMorning="droppable3" droppableAfternoon="droppable8"/>}
+                        {value === 3 && <DrappableContainer getItemStyle={getItemStyle} getListStyle={getListStyle} morning={data.morning4} afternoon={data.afternoon4}  droppableMorning="droppable4" droppableAfternoon="droppable9"/>}
+                        {value === 4 && <DrappableContainer getItemStyle={getItemStyle} getListStyle={getListStyle} morning={data.morning5} afternoon={data.afternoon5}  droppableMorning="droppable5" droppableAfternoon="droppable10"/>}
                         </Row>
                     </Col>
                 </Row>

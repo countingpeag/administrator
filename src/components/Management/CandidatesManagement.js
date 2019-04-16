@@ -25,9 +25,7 @@ const reorder = (list, startIndex, endIndex) => {
     return result;
 };
 
-/**
- * Moves an item from one list to another list.
- */
+//Moves an item from one list to another list.
 const move = (source, destination, droppableSource, droppableDestination) => {
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
@@ -64,14 +62,22 @@ const getListStyle = isDraggingOver => ({
 });
 
 class CandidatesManagement extends Component {
-    state = {
-        items: getItems(10),
-        selected1: getItems(5, 10),
-        selected2: getItems(5, 15),
-        selected3: getItems(5, 20),
-        selected4: getItems(5, 25),
-        selected5: getItems(5, 30),
-    };
+    constructor(){
+        super();
+        this.state = {
+            items: getItems(10),
+            morning1: getItems(5, 10),
+            morning2: getItems(5, 15),
+            morning3: getItems(5, 20),
+            morning4: getItems(5, 25),
+            morning5: getItems(5, 30),
+            afternoon1: getItems(5, 35),
+            afternoon2: getItems(5, 40),
+            afternoon3: getItems(5, 45),
+            afternoon4: getItems(5, 50),
+            afternoon5: getItems(5, 55)
+        };
+    }
 
     /**
      * A semi-generic way to handle multiple lists. Matches
@@ -79,12 +85,17 @@ class CandidatesManagement extends Component {
      * source arrays stored in the state.
      */
     id2List = {
-        droppable: 'items',
-        droppable2: 'selected1',
-        droppable3: 'selected2',
-        droppable4: 'selected3',
-        droppable5: 'selected4',
-        droppable6: 'selected5',
+        items: 'items',
+        droppable1: 'morning1',
+        droppable2: 'morning2',
+        droppable3: 'morning3',
+        droppable4: 'morning4',
+        droppable5: 'morning5',
+        droppable6: 'afternoon1',
+        droppable7: 'afternoon2',
+        droppable8: 'afternoon3',
+        droppable9: 'afternoon4',
+        droppable10: 'afternoon5',
     };
 
     getList = id => this.state[this.id2List[id]];
@@ -106,20 +117,35 @@ class CandidatesManagement extends Component {
 
             let state = { items };
 
+            if (source.droppableId === 'droppable1') {
+                state = { droppable1: items };
+            }
             if (source.droppableId === 'droppable2') {
-                state = { selected1: items };
+                state = { droppable2: items };
             }
             if (source.droppableId === 'droppable3') {
-                state = { selected2: items };
+                state = { droppable3: items };
             }
             if (source.droppableId === 'droppable4') {
-                state = { selected3: items };
+                state = { droppable4: items };
             }
             if (source.droppableId === 'droppable5') {
-                state = { selected4: items };
+                state = { droppable5: items };
             }
             if (source.droppableId === 'droppable6') {
-                state = { selected5: items };
+                state = { droppable6: items };
+            }
+            if (source.droppableId === 'droppable7') {
+                state = { droppable7: items };
+            }
+            if (source.droppableId === 'droppable8') {
+                state = { droppable8: items };
+            }
+            if (source.droppableId === 'droppable9') {
+                state = { droppable9: items };
+            }
+            if (source.droppableId === 'droppable10') {
+                state = { droppable10: items };
             }
 
             this.setState(state);
@@ -131,127 +157,133 @@ class CandidatesManagement extends Component {
                 destination
             );
 
-            if((source.droppableId==="droppable" && destination.droppableId==="droppable2") || (source.droppableId==="droppable2" && destination.droppableId==="droppable")){
+            if((source.droppableId==="items" && destination.droppableId==="droppable1") || (source.droppableId==="droppable1" && destination.droppableId==="items")){
                 this.setState({
-                    items: result.droppable,
-                    selected1: result.droppable2
+                    items: result.items,
+                    morning1: result.droppable1
                 });
             }
-            else if((source.droppableId==="droppable" && destination.droppableId==="droppable3") || (source.droppableId==="droppable3" && destination.droppableId==="droppable")){
+            else if((source.droppableId==="items" && destination.droppableId==="droppable2") || (source.droppableId==="droppable2" && destination.droppableId==="items")){
                 this.setState({
-                    items: result.droppable,
-                    selected2: result.droppable3
+                    items: result.items,
+                    morning2: result.droppable2
                 });
             }
-            else if( (source.droppableId==="droppable" && destination.droppableId==="droppable4") || (source.droppableId==="droppable4" && destination.droppableId==="droppable")) {
+            else if( (source.droppableId==="items" && destination.droppableId==="droppable3") || (source.droppableId==="droppable3" && destination.droppableId==="items")) {
                 this.setState({
-                    items: result.droppable,
-                    selected3: result.droppable4
+                    items: result.items,
+                    morning3: result.droppable3
                 });
             }
-            else if((source.droppableId==="droppable" && destination.droppableId==="droppable5") || (source.droppableId==="droppable5" && destination.droppableId==="droppable")){
+            else if((source.droppableId==="items" && destination.droppableId==="droppable4") || (source.droppableId==="droppable4" && destination.droppableId==="items")){
                 this.setState({
-                    items: result.droppable,
-                    selected4: result.droppable5
+                    items: result.items,
+                    morning4: result.droppable4
                 });
             }
-            else if((source.droppableId==="droppable" && destination.droppableId==="droppable6") || (source.droppableId==="droppable6" && destination.droppableId==="droppable")){
+            else if((source.droppableId==="items" && destination.droppableId==="droppable5") || (source.droppableId==="droppable5" && destination.droppableId==="items")){
                 this.setState({
-                    items: result.droppable,
-                    selected5: result.droppable6
+                    items: result.items,
+                    morning5: result.droppable5
                 });
             }
-            else if((source.droppableId==="droppable2" && destination.droppableId==="droppable3") || (source.droppableId==="droppable3" && destination.droppableId==="droppable2")){
+            else if((source.droppableId==="items" && destination.droppableId==="droppable6") || (source.droppableId==="droppable6" && destination.droppableId==="items")){
                 this.setState({
-                    selected1: result.droppable2,
-                    selected2: result.droppable3
+                    items: result.items,
+                    afternoon1: result.droppable6
                 });
             }
-            else if((source.droppableId==="droppable2" && destination.droppableId==="droppable4") || (source.droppableId==="droppable4" && destination.droppableId==="droppable2")){
+            else if((source.droppableId==="items" && destination.droppableId==="droppable7") || (source.droppableId==="droppable7" && destination.droppableId==="items")){
                 this.setState({
-                    selected1: result.droppable2,
-                    selected3: result.droppable4
+                    items: result.items,
+                    afternoon2: result.droppable7
                 });
             }
-            else if((source.droppableId==="droppable2" && destination.droppableId==="droppable5") || (source.droppableId==="droppable5" && destination.droppableId==="droppable2")){
+            else if((source.droppableId==="items" && destination.droppableId==="droppable8") || (source.droppableId==="droppable8" && destination.droppableId==="items")){
                 this.setState({
-                    selected1: result.droppable2,
-                    selected4: result.droppable5
+                    items: result.items,
+                    afternoon3: result.droppable8
                 });
             }
-            else if((source.droppableId==="droppable2" && destination.droppableId==="droppable6") || (source.droppableId==="droppable6" && destination.droppableId==="droppable2")){
+            else if((source.droppableId==="items" && destination.droppableId==="droppable9") || (source.droppableId==="droppable9" && destination.droppableId==="items")){
                 this.setState({
-                    selected1: result.droppable2,
-                    selected5: result.droppable6
+                    items: result.items,
+                    afternoon4: result.droppable9
                 });
             }
-            else if((source.droppableId==="droppable3" && destination.droppableId==="droppable4") || (source.droppableId==="droppable4" && destination.droppableId==="droppable3")){
+            else if((source.droppableId==="items" && destination.droppableId==="droppable10") || (source.droppableId==="droppable10" && destination.droppableId==="items")){
                 this.setState({
-                    selected2: result.droppable3,
-                    selected3: result.droppable4
+                    items: result.items,
+                    afternoon5: result.droppable10
                 });
             }
-            else if((source.droppableId==="droppable3" && destination.droppableId==="droppable5") || (source.droppableId==="droppable5" && destination.droppableId==="droppable3")){
+            else if((source.droppableId==="droppable1" && destination.droppableId==="droppable6") || (source.droppableId==="droppable6" && destination.droppableId==="droppable1")){
                 this.setState({
-                    selected2: result.droppable3,
-                    selected4: result.droppable5
+                    morning1: result.droppable1,
+                    afternoon1: result.droppable6
                 });
             }
-            else if((source.droppableId==="droppable3" && destination.droppableId==="droppable6") || (source.droppableId==="droppable6" && destination.droppableId==="droppable3")){
+            else if((source.droppableId==="droppable2" && destination.droppableId==="droppable7") || (source.droppableId==="droppable7" && destination.droppableId==="droppable2")){
                 this.setState({
-                    selected2: result.droppable3,
-                    selected5: result.droppable6
+                    morning2: result.droppable2,
+                    afternoon2: result.droppable7
                 });
             }
-            else if((source.droppableId==="droppable4" && destination.droppableId==="droppable5") || (source.droppableId==="droppable5" && destination.droppableId==="droppable4")){
+            else if((source.droppableId==="droppable3" && destination.droppableId==="droppable8") || (source.droppableId==="droppable8" && destination.droppableId==="droppable3")){
                 this.setState({
-                    selected3: result.droppable4,
-                    selected4: result.droppable5
+                    morning3: result.droppable3,
+                    afternoon3: result.droppable8
                 });
             }
-            else if((source.droppableId==="droppable4" && destination.droppableId==="droppable6") || (source.droppableId==="droppable6" && destination.droppableId==="droppable4")){
+            else if((source.droppableId==="droppable4" && destination.droppableId==="droppable9") || (source.droppableId==="droppable9" && destination.droppableId==="droppable4")){
                 this.setState({
-                    selected3: result.droppable4,
-                    selected5: result.droppable6
+                    morning4: result.droppable4,
+                    afternoon4: result.droppable9
                 });
             }
-            else if((source.droppableId==="droppable5" && destination.droppableId==="droppable6") || (source.droppableId==="droppable6" && destination.droppableId==="droppable5")){
+            else if((source.droppableId==="droppable5" && destination.droppableId==="droppable10") || (source.droppableId==="droppable10" && destination.droppableId==="droppable5")){
                 this.setState({
-                    selected4: result.droppable5,
-                    selected5: result.droppable6
+                    morning5: result.droppable5,
+                    afternoon5: result.droppable10
                 });
             }
         }
     };
 
-    demoFromHTML() {
+    downloadFile() {
 
         const columns = [
         {title: "ID", dataKey: "id"},
-        {title: "Name", dataKey: "name"},
-        {title: "Country", dataKey: "country"},
+        {title: "Nombre", dataKey: "name"},
+        {title: "Apellidos", dataKey: "lastname"},
+        {title: "Edad", dataKey: "age"},
+        {title: "Calificacion", dataKey: "score"},
+        {title: "turno", dataKey: "shift"}
         ];
+
         const rows = [
-        {"id": 1, "name": "Shaw", "country": "Tanzania"},
-        {"id": 2, "name": "Nelson", "country": "Kazakhstan"},
-        {"id": 3, "name": "Garcia", "country": "Madagascar"},
+        {"id": 1, "name": "Shaw", "lastname": "Palma", "age": "18", "score":"70", "shift": "M"},
+        {"id": 2, "name": "Shaw", "lastname": "Nuñez", "age": "17", "score":"56", "shift": "M"},
+        {"id": 3, "name": "Shaw", "lastname": "Perez", "age": "17", "score":"45", "shift": "M"},
+        {"id": 4, "name": "Shaw", "lastname": "Macias", "age": "15", "score":"35", "shift": "M"},
+        {"id": 5, "name": "Shaw", "lastname": "Garcia", "age": "16", "score":"20", "shift": "M"},
+        {"id": 6, "name": "Shaw", "lastname": "Albarado", "age": "15", "score":"70", "shift": "M"}
         ];
         
         var doc = new jsPDF('p', 'pt');
         doc.autoTable(columns, rows, {
-            styles: {fillColor: [100, 255, 255]},
+            styles: {fillColor: [164, 164, 164]},
                 columnStyles: {
                 id: {fillColor: 255}
             },
             margin: {top: 60},
             addPageContent: function(data) {
-                doc.text("Esto es una prueba de lo que puede contener un reporte", 40, 30);
+                doc.text("Aspirantes", 40, 30);
             }
         });
         doc.save('test.pdf');
         }
-    // Normally you would want to split things out into separate components.
-    // But in this example everything is just done in one place for simplicity
+        
     render() {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
@@ -263,12 +295,15 @@ class CandidatesManagement extends Component {
                             </Row>
                             <Row center="xs">
                                 <Col xs={12} id="limitTen">
-                                    <DroppableDetailed getItemStyle={getItemStyle} getListStyle={getListStyle} items={this.state.items} droppableId="droppable" />
+                                    <DroppableDetailed getItemStyle={getItemStyle} getListStyle={getListStyle} items={this.state.items} droppableId="items" />
                                 </Col>
                             </Row>
                         </Col>
                         <Col xs={9}>
                             <CandidatesTab getItemStyle={getItemStyle} getListStyle={getListStyle} data={this.state}/>
+                        </Col>
+                        <Col>
+                            <Button onClick={this.downloadFile}>PDF</Button>
                         </Col>
                     </Row>
                 </Grid>
