@@ -394,3 +394,22 @@ export const saveOrupdateTecher = payload => {
         });
     };
 };
+
+
+//Candidates actions
+export const GET_CANDIDATES = "GET_CANDIDATES";
+
+const candidates = payload => ({type:GET_CANDIDATES, payload:payload});
+
+export const getCandidates = payload => {
+    return dispatch => {
+        axios.get(`http://localhost:8080/nucleus/candidates/retrieve`)
+        .then( ({data}) => {
+            dispatch(candidates(data));
+        })
+        .catch( error => {
+            console.log(error);
+        });
+
+    };
+};

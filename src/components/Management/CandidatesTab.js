@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import DroppableDetailed from '../Util/Droppable';
 import DrappableContainer from './DrappableContainer';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';

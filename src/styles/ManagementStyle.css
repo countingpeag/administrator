@@ -17,8 +17,17 @@ ul{
     list-style-type: none;
 }
 
+.topSpace{
+    margin-top: 15%;
+}
+
+.bottomSpace{
+    margin-bottom: 10%;
+}
+
 #limitTen{
-    height: 730px;
+    margin-left: 3%;
+    height: 680px;
     position: relative;
     overflow: auto;
     flex: 1;

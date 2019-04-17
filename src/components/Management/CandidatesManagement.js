@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import { connect } from 'react-redux';
+import { getCandidates } from '../../actions';
 import DroppableDetailed from '../Util/Droppable';
 import CandidatesTab from './CandidatesTab';
 import Button from '@material-ui/core/Button';
@@ -77,6 +79,8 @@ class CandidatesManagement extends Component {
             afternoon4: getItems(5, 50),
             afternoon5: getItems(5, 55)
         };
+
+        this.candidatesPDF = this.candidatesPDF.bind(this);
     }
 
     /**
@@ -278,11 +282,75 @@ class CandidatesManagement extends Component {
             },
             margin: {top: 60},
             addPageContent: function(data) {
+                doc.text("Especialidad 1", 40, 30);
+            }
+        });
+        doc.addPage();
+        doc.autoTable(columns, rows, {
+            styles: {fillColor: [164, 164, 164]},
+                columnStyles: {
+                id: {fillColor: 255}
+            },
+            margin: {top: 60},
+            addPageContent: function(data) {
+                doc.text("Especialidad 2", 40, 30);
+            }
+        });
+        doc.addPage();
+        doc.autoTable(columns, rows, {
+            styles: {fillColor: [164, 164, 164]},
+                columnStyles: {
+                id: {fillColor: 255}
+            },
+            margin: {top: 60},
+            addPageContent: function(data) {
+                doc.text("Especialidad 3", 40, 30);
+            }
+        });
+        doc.addPage();
+        doc.autoTable(columns, rows, {
+            styles: {fillColor: [164, 164, 164]},
+                columnStyles: {
+                id: {fillColor: 255}
+            },
+            margin: {top: 60},
+            addPageContent: function(data) {
+                doc.text("Especialidad 4", 40, 30);
+            }
+        });
+        doc.save('test.pdf');
+    }
+
+    candidatesPDF(){
+        console.log(this.props.candidatesData);
+        const columns = [
+            {title: "ID", dataKey: "idCandidate"},
+            {title: "Nombre", dataKey: "candidateName"},
+            {title: "Apellidos", dataKey: "candidateLastNameFather"},
+            {title: "Edad", dataKey: "candidateAge"},
+            {title: "Calificacion", dataKey: "candidateScore"},
+            {title: "Telefono", dataKey: "candidatePersonalPhone"}
+            ];
+
+        const rows = this.props.candidatesData;
+
+        var doc = new jsPDF('p', 'pt');
+        doc.autoTable(columns, rows, {
+            styles: {fillColor: [164, 164, 164]},
+                columnStyles: {
+                id: {fillColor: 255}
+            },
+            margin: {top: 60},
+            addPageContent: function(data) {
                 doc.text("Aspirantes", 40, 30);
             }
         });
         doc.save('test.pdf');
-        }
+    }
+
+    componentDidMount(){
+        this.props.getCandidates();
+    }
         
     render() {
         return (
@@ -290,21 +358,29 @@ class CandidatesManagement extends Component {
                 <Grid>
                     <Row>
                         <Col xs={3}>
-                            <Row center="xs">
-                                <h2>No seleccionados</h2>
+                            <Row center="xs" className="topSpace">    
+                                <Button variant="contained" color="secondary" onClick={this.candidatesPDF}>PDF Aspirantes</Button>
                             </Row>
                             <Row center="xs">
                                 <Col xs={12} id="limitTen">
                                     <DroppableDetailed getItemStyle={getItemStyle} getListStyle={getListStyle} items={this.state.items} droppableId="items" />
                                 </Col>
                             </Row>
+                            <Row center="xs" className="bottomSpace">
+                                <Col md={4}>
+                                    <Button variant="contained" color="primary" onClick={null}>Guardar</Button>
+                                </Col>
+                                <Col md={4}>
+                                    <Button variant="contained" color="secondary" onClick={this.downloadFile}>PDF</Button>
+                                </Col>
+                                
+                                
+                            </Row>
                         </Col>
                         <Col xs={9}>
                             <CandidatesTab getItemStyle={getItemStyle} getListStyle={getListStyle} data={this.state}/>
                         </Col>
-                        <Col>
-                            <Button onClick={this.downloadFile}>PDF</Button>
-                        </Col>
+
                     </Row>
                 </Grid>
             </DragDropContext>
@@ -312,5 +388,12 @@ class CandidatesManagement extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    candidatesData: state.candidatesData
+});
 
-export default CandidatesManagement;
+const mapDispatchToProps = dispatch => ({
+    getCandidates: () => dispatch(getCandidates())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CandidatesManagement);
