@@ -3,9 +3,10 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
 import { getCandidates } from '../../actions';
+import Button from '@material-ui/core/Button';
 import DroppableDetailed from '../Util/Droppable';
 import CandidatesTab from './CandidatesTab';
-import Button from '@material-ui/core/Button';
+import DownloadCandidates from './CandidatesExcel';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
@@ -322,7 +323,6 @@ class CandidatesManagement extends Component {
     }
 
     candidatesPDF(){
-        console.log(this.props.candidatesData);
         const columns = [
             {title: "ID", dataKey: "idCandidate"},
             {title: "Nombre", dataKey: "candidateName"},
@@ -359,7 +359,7 @@ class CandidatesManagement extends Component {
                     <Row>
                         <Col xs={3}>
                             <Row center="xs" className="topSpace">    
-                                <Button variant="contained" color="secondary" onClick={this.candidatesPDF}>PDF Aspirantes</Button>
+                                <DownloadCandidates />
                             </Row>
                             <Row center="xs">
                                 <Col xs={12} id="limitTen">

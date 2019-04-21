@@ -18,6 +18,7 @@
     "react-chartkick": "^0.3.0",
     "react-dom": "^16.6.3",
     "react-dropzone": "^5.1.1",
+    "react-export-excel": "^0.5.3",
     "react-flexbox-grid": "^2.1.2",
     "react-redux": "^5.0.7",
     "react-router": "^3.2.1",
