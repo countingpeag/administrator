@@ -1,240 +1,87 @@
 import React, { Component } from "react";
 import ReactExport from "react-export-excel";
-import Button from '@material-ui/core/Button';
+import CustomButton from '../Util/CustomButton';
+import green from '@material-ui/core/colors/green';
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
-//This is Test Data
-const dataSet1 = [
-    {
-        candidateName: "Josef",
-        candidateLastNameFather: 450500,
-        candidateLastNameMother: 'M',
-        candidateBirthDate: true,
-        candidateCivilStatus: 'M',
-        candidateGenre: 'M',
-        candidateAge: 'M',
-        candidateMunicipalityBorn: 'M',
-        candidateLocalityBorn: 'M',
-        candidateStateBorn: 'M',
-        candidateCurrentStreet: 'M',
-        candidateCurrentHouseNumber: 'M',
-        candidateNeighborhood: 'M',
-        candidateCurrentZipCode: '54060',
-        candidateCurrentMunicipality: 'M',
-        candidateCurrentLocality: 'M',
-        candidateCurrentState: 'M',
-        candidateCellPhone: 'M',
-        candidatePersonalPhone: 'M',
-        candidateEmail: 'M',
-        candidateFatherName: 'M',
-        candidateMotherName: 'M',
-        candidateMotherOccupation: 'M',
-        candidateFatherOccupation: 'M',
-        candidateMotherPhone: 'M',
-        candidateFatherPhone: 'M',
-        candidateMiddleSchool: 'M',
-        candidateMunicipalitySchool: 'M',
-        candidateStateSchool: 'M',
-        candidateSchoolType: 'M',
-        candidateSchoolRegime: 'M',
-        candidateSchoolKey: 'M',
-        candidateEndDate: 'M',
-
-        insuranceNumber: 'M',
-        healthCandidateHeight: 'M',
-        healthCandidateWeight: 'M',
-        healthCandidateBloodType: 'M',
-        healthIllnessFlag: 'M',
-        healthDisability: 'M',
-        healthGlassesFlag: 'M',
-        healthSmokingFlag: 'M',
-        healthLaterality: 'M',
-
-        preferencesScholarshipFlag: 'M',
-        preferencesShiftWished: 'M',
-        preferencesWayToKnow: 'M',
-        preferencesSpecialtyWhished1: 'M',
-        preferencesSpecialtyWhished2: 'M',
-        preferencesSpecialtyWhished3: 'M',
-        preferencesSpecialtyWhished4: 'M',
-
-        finalScore: 'M'
-    },
-    {
-        candidateName: "Josef",
-        candidateLastNameFather: 450500,
-        candidateLastNameMother: 'M',
-        candidateBirthDate: true,
-        candidateCivilStatus: 'M',
-        candidateGenre: 'M',
-        candidateAge: 'M',
-        candidateMunicipalityBorn: 'M',
-        candidateLocalityBorn: 'M',
-        candidateStateBorn: 'M',
-        candidateCurrentStreet: 'M',
-        candidateCurrentHouseNumber: 'M',
-        candidateNeighborhood: 'M',
-        candidateCurrentZipCode: '54060',
-        candidateCurrentMunicipality: 'M',
-        candidateCurrentLocality: 'M',
-        candidateCurrentState: 'M',
-        candidateCellPhone: 'M',
-        candidatePersonalPhone: 'M',
-        candidateEmail: 'M',
-        candidateFatherName: 'M',
-        candidateMotherName: 'M',
-        candidateMotherOccupation: 'M',
-        candidateFatherOccupation: 'M',
-        candidateMotherPhone: 'M',
-        candidateFatherPhone: 'M',
-        candidateMiddleSchool: 'M',
-        candidateMunicipalitySchool: 'M',
-        candidateStateSchool: 'M',
-        candidateSchoolType: 'M',
-        candidateSchoolRegime: 'M',
-        candidateSchoolKey: 'M',
-        candidateEndDate: 'M',
-
-        insuranceNumber: 'M',
-        healthCandidateHeight: 'M',
-        healthCandidateWeight: 'M',
-        healthCandidateBloodType: 'M',
-        healthIllnessFlag: 'M',
-        healthDisability: 'M',
-        healthGlassesFlag: 'M',
-        healthSmokingFlag: 'M',
-        healthLaterality: 'M',
-
-        preferencesScholarshipFlag: 'M',
-        preferencesShiftWished: 'M',
-        preferencesWayToKnow: 'M',
-        preferencesSpecialtyWhished1: 'M',
-        preferencesSpecialtyWhished2: 'M',
-        preferencesSpecialtyWhished3: 'M',
-        preferencesSpecialtyWhished4: 'M',
-
-        finalScore: 'M'
-    },
-    {
-        candidateName: "Josef",
-        candidateLastNameFather: 450500,
-        candidateLastNameMother: 'M',
-        candidateBirthDate: true,
-        candidateCivilStatus: 'M',
-        candidateGenre: 'M',
-        candidateAge: 'M',
-        candidateMunicipalityBorn: 'M',
-        candidateLocalityBorn: 'M',
-        candidateStateBorn: 'M',
-        candidateCurrentStreet: 'M',
-        candidateCurrentHouseNumber: 'M',
-        candidateNeighborhood: 'M',
-        candidateCurrentZipCode: '54060',
-        candidateCurrentMunicipality: 'M',
-        candidateCurrentLocality: 'M',
-        candidateCurrentState: 'M',
-        candidateCellPhone: 'M',
-        candidatePersonalPhone: 'M',
-        candidateEmail: 'M',
-        candidateFatherName: 'M',
-        candidateMotherName: 'M',
-        candidateMotherOccupation: 'M',
-        candidateFatherOccupation: 'M',
-        candidateMotherPhone: 'M',
-        candidateFatherPhone: 'M',
-        candidateMiddleSchool: 'M',
-        candidateMunicipalitySchool: 'M',
-        candidateStateSchool: 'M',
-        candidateSchoolType: 'M',
-        candidateSchoolRegime: 'M',
-        candidateSchoolKey: 'M',
-        candidateEndDate: 'M',
-
-        insuranceNumber: 'M',
-        healthCandidateHeight: 'M',
-        healthCandidateWeight: 'M',
-        healthCandidateBloodType: 'M',
-        healthIllnessFlag: 'M',
-        healthDisability: 'M',
-        healthGlassesFlag: 'M',
-        healthSmokingFlag: 'M',
-        healthLaterality: 'M',
-
-        preferencesScholarshipFlag: 'M',
-        preferencesShiftWished: 'M',
-        preferencesWayToKnow: 'M',
-        preferencesSpecialtyWhished1: 'M',
-        preferencesSpecialtyWhished2: 'M',
-        preferencesSpecialtyWhished3: 'M',
-        preferencesSpecialtyWhished4: 'M',
-
-        finalScore: 'M'
-    },
-    {
-        candidateName: "Josef",
-        candidateLastNameFather: 450500,
-        candidateLastNameMother: 'M',
-        candidateBirthDate: true,
-        candidateCivilStatus: 'M',
-        candidateGenre: 'M',
-        candidateAge: 'M',
-        candidateMunicipalityBorn: 'M',
-        candidateLocalityBorn: 'M',
-        candidateStateBorn: 'M',
-        candidateCurrentStreet: 'M',
-        candidateCurrentHouseNumber: 'M',
-        candidateNeighborhood: 'M',
-        candidateCurrentZipCode: '54060',
-        candidateCurrentMunicipality: 'M',
-        candidateCurrentLocality: 'M',
-        candidateCurrentState: 'M',
-        candidateCellPhone: 'M',
-        candidatePersonalPhone: 'M',
-        candidateEmail: 'M',
-        candidateFatherName: 'M',
-        candidateMotherName: 'M',
-        candidateMotherOccupation: 'M',
-        candidateFatherOccupation: 'M',
-        candidateMotherPhone: 'M',
-        candidateFatherPhone: 'M',
-        candidateMiddleSchool: 'M',
-        candidateMunicipalitySchool: 'M',
-        candidateStateSchool: 'M',
-        candidateSchoolType: 'M',
-        candidateSchoolRegime: 'M',
-        candidateSchoolKey: 'M',
-        candidateEndDate: 'M',
-
-        insuranceNumber: 'M',
-        healthCandidateHeight: 'M',
-        healthCandidateWeight: 'M',
-        healthCandidateBloodType: 'M',
-        healthIllnessFlag: 'M',
-        healthDisability: 'M',
-        healthGlassesFlag: 'M',
-        healthSmokingFlag: 'M',
-        healthLaterality: 'M',
-
-        preferencesScholarshipFlag: 'M',
-        preferencesShiftWished: 'M',
-        preferencesWayToKnow: 'M',
-        preferencesSpecialtyWhished1: 'M',
-        preferencesSpecialtyWhished2: 'M',
-        preferencesSpecialtyWhished3: 'M',
-        preferencesSpecialtyWhished4: 'M',
-
-        finalScore: 'M'
-    }
-];
-
 class DownloadCandidates extends Component {
+
+    constructor(){
+        super();
+        this.state = {
+            data: []
+        };        
+    }
+    componentWillReceiveProps(props){
+        let dataModified = props.data.map( candidate => {
+            return {
+                candidateName: candidate.candidateName,
+                candidateLastNameFather: candidate.candidateLastNameFather,
+                candidateLastNameMother: candidate.candidateLastNameMother,
+                candidateBirthDate: candidate.candidateBirthDate,
+                candidateCivilStatus: candidate.candidateCivilStatus,
+                candidateGenre: candidate.candidateGenre,
+                candidateAge: candidate.candidateAge,
+                candidateMunicipalityBorn: candidate.candidateMunicipalityBorn,
+                candidateLocalityBorn: candidate.candidateLocalityBorn,
+                candidateStateBorn: candidate.candidateStateBorn,
+                candidateCurrentStreet: candidate.candidateCurrentStreet,
+                candidateCurrentHouseNumber: candidate.candidateCurrentHouseNumber,
+                candidateNeighborhood: candidate.candidateNeighborhood,
+                candidateCurrentZipCode: candidate.candidateCurrentZipCode,
+                candidateCurrentMunicipality: candidate.candidateCurrentMunicipality,
+                candidateCurrentLocality: candidate.candidateCurrentLocality,
+                candidateCurrentState: candidate.candidateCurrentState,
+                candidateCellPhone: candidate.candidateCellPhone,
+                candidatePersonalPhone: candidate.candidatePersonalPhone,
+                candidateEmail: candidate.candidateEmail,
+                candidateFatherName: candidate.candidateFatherName,
+                candidateMotherName: candidate.candidateMotherName,
+                candidateMotherOccupation: candidate.candidateMotherOccupation,
+                candidateFatherOccupation: candidate.candidateFatherOccupation,
+                candidateMotherPhone: candidate.candidateMotherPhone,
+                candidateFatherPhone: candidate.candidateFatherPhone,
+                candidateMiddleSchool: candidate.candidateMiddleSchool,
+                candidateMunicipalitySchool: candidate.candidateMunicipalitySchool,
+                candidateStateSchool: candidate.candidateStateSchool,
+                candidateSchoolType: candidate.candidateSchoolType,
+                candidateSchoolRegime: candidate.candidateSchoolRegime,
+                candidateSchoolKey: candidate.candidateSchoolKey,
+                candidateEndDate: candidate.candidateEndDate,
+        
+                insuranceNumber: candidate.health.insuranceNumber,
+                healthCandidateHeight: candidate.health.healthCandidateHeight,
+                healthCandidateWeight: candidate.health.healthCandidateWeight,
+                healthCandidateBloodType: candidate.health.healthCandidateBloodType,
+                healthIllnessFlag: candidate.health.healthIllnessFlag,
+                healthDisability: candidate.health.healthDisability,
+                healthGlassesFlag: candidate.health.healthGlassesFlag,
+                healthSmokingFlag: candidate.health.healthSmokingFlag,
+                healthLaterality: candidate.health.healthLaterality,
+        
+                preferencesScholarshipFlag: candidate.preference.preferencesScholarshipFlag,
+                preferencesShiftWished: candidate.preference.preferencesShiftWished,
+                preferencesWayToKnow: candidate.preference.preferencesWayToKnow,
+                preferencesSpecialtyWhished1: candidate.preference.preferencesSpecialtyWhished1,
+                preferencesSpecialtyWhished2: candidate.preference.preferencesSpecialtyWhished2,
+                preferencesSpecialtyWhished3: candidate.preference.preferencesSpecialtyWhished3,
+                preferencesSpecialtyWhished4: candidate.preference.preferencesSpecialtyWhished4,
+        
+                finalScore: "100"
+            };
+        }); 
+
+        this.setState({data:dataModified});
+    }  
+
     render() {
+        const { data } = this.state;
         return (
-            <ExcelFile element={<Button variant="contained" color="secondary">XML Aspirantes</Button>}>
-                <ExcelSheet data={dataSet1} name="Aspirantes">
+            <ExcelFile element={<CustomButton value={"XML Aspirantes"} color={green} />}>
+                <ExcelSheet data={data} name="Aspirantes">
                     <ExcelColumn label="Nombre" value="candidateName"/>
                     <ExcelColumn label="Apellido Paterno" value="candidateLastNameFather"/>
                     <ExcelColumn label="Apellido Materno" value="candidateLastNameMother"/>

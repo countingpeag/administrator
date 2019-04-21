@@ -359,7 +359,7 @@ class CandidatesManagement extends Component {
                     <Row>
                         <Col xs={3}>
                             <Row center="xs" className="topSpace">    
-                                <DownloadCandidates />
+                                <DownloadCandidates data={this.props.candidatesData}/>
                             </Row>
                             <Row center="xs">
                                 <Col xs={12} id="limitTen">
