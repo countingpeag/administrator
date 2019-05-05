@@ -403,7 +403,7 @@ const candidates = payload => ({type:GET_CANDIDATES, payload:payload});
 
 export const getCandidates = payload => {
     return dispatch => {
-        axios.get(`http://localhost:8080/nucleus/candidates/retrieve`)
+        axios.get(`http://localhost:8080/nucleus/candidates/retrieve/${localStorage.getItem("tokenAuth")}`)
         .then( ({data}) => {
             dispatch(candidates(data));
         })

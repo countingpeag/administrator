@@ -79,7 +79,7 @@ class TeacherAppend extends Component{
     }
 
     handleSubmit(){
-        const { specialities, subjects, teacherName, teacherLastnameFather, teacherLastnameMother, teacherUsername, teacherRFC, teacherInstitute, teacherGenre } = this.state;
+        const { specialities, subjects, teacherName, teacherLastnameFather, teacherLastnameMother, teacherUsername, teacherRFC, teacherGenre } = this.state;
         let teacher = {
             teacherName,
             teacherLastNameFather:teacherLastnameFather,
@@ -97,7 +97,6 @@ class TeacherAppend extends Component{
             subjects,
             specialities
         };
-        console.log(teacher);
         this.props.saveTeacher(teacher);
     }
 
@@ -106,7 +105,7 @@ class TeacherAppend extends Component{
     }
 
     render(){
-        const { specialities, subjects, teacherName, teacherLastnameFather, teacherLastnameMother, teacherUsername, teacherRFC, teacherInstitute, teacherGenre } = this.state;
+        const { specialities, subjects, teacherName, teacherLastnameFather, teacherLastnameMother, teacherUsername, teacherRFC, teacherGenre } = this.state;
         const { schoolData } = this.props;
         
         return(

@@ -21,7 +21,7 @@ class DownloadCandidates extends Component {
                 candidateName: candidate.candidateName,
                 candidateLastNameFather: candidate.candidateLastNameFather,
                 candidateLastNameMother: candidate.candidateLastNameMother,
-                candidateBirthDate: candidate.candidateBirthDate,
+                candidateBirthDate: new Date(candidate.candidateBirthDate),
                 candidateCivilStatus: candidate.candidateCivilStatus,
                 candidateGenre: candidate.candidateGenre,
                 candidateAge: candidate.candidateAge,
@@ -50,19 +50,19 @@ class DownloadCandidates extends Component {
                 candidateSchoolType: candidate.candidateSchoolType,
                 candidateSchoolRegime: candidate.candidateSchoolRegime,
                 candidateSchoolKey: candidate.candidateSchoolKey,
-                candidateEndDate: candidate.candidateEndDate,
+                candidateEndDate: new Date(candidate.candidateEndDate),
         
                 insuranceNumber: candidate.health.insuranceNumber,
                 healthCandidateHeight: candidate.health.healthCandidateHeight,
                 healthCandidateWeight: candidate.health.healthCandidateWeight,
                 healthCandidateBloodType: candidate.health.healthCandidateBloodType,
-                healthIllnessFlag: candidate.health.healthIllnessFlag,
-                healthDisability: candidate.health.healthDisability,
-                healthGlassesFlag: candidate.health.healthGlassesFlag,
-                healthSmokingFlag: candidate.health.healthSmokingFlag,
+                healthIllnessFlag: candidate.health.healthIllnessFlag==='1'?"Si":"No",
+                healthDisability: candidate.health.healthDisability==='1'?"Si":"No",
+                healthGlassesFlag: candidate.health.healthGlassesFlag==='1'?"Si":"No",
+                healthSmokingFlag: candidate.health.healthSmokingFlag==='1'?"Si":"No",
                 healthLaterality: candidate.health.healthLaterality,
         
-                preferencesScholarshipFlag: candidate.preference.preferencesScholarshipFlag,
+                preferencesScholarshipFlag: candidate.preference.preferencesScholarshipFlag==='1'?"Si":"No",
                 preferencesShiftWished: candidate.preference.preferencesShiftWished,
                 preferencesWayToKnow: candidate.preference.preferencesWayToKnow,
                 preferencesSpecialtyWhished1: candidate.preference.preferencesSpecialtyWhished1,
@@ -70,7 +70,7 @@ class DownloadCandidates extends Component {
                 preferencesSpecialtyWhished3: candidate.preference.preferencesSpecialtyWhished3,
                 preferencesSpecialtyWhished4: candidate.preference.preferencesSpecialtyWhished4,
         
-                finalScore: "100"
+                finalScore: candidate.candidateScore
             };
         }); 
 

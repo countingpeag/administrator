@@ -10,8 +10,6 @@ import DownloadCandidates from './CandidatesExcel';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
-
-
 // fake data generator
 const getItems = (count, offset = 0) =>
     Array.from({ length: count }, (v, k) => k).map(k => ({
@@ -256,7 +254,6 @@ class CandidatesManagement extends Component {
     };
 
     downloadFile() {
-
         const columns = [
         {title: "ID", dataKey: "id"},
         {title: "Nombre", dataKey: "name"},
@@ -373,8 +370,6 @@ class CandidatesManagement extends Component {
                                 <Col md={4}>
                                     <Button variant="contained" color="secondary" onClick={this.downloadFile}>PDF</Button>
                                 </Col>
-                                
-                                
                             </Row>
                         </Col>
                         <Col xs={9}>
