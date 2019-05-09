@@ -1,12 +1,8 @@
-
 .header{
-
-    /*border-radius: 7px 7px 7px 7px;
-    border: 1px solid #c3c3c3;
-    background-color: white;*/
     margin-top: 5%;
     text-align: center;
 }
+
 .iconLogin{
     max-width: 60%;
     min-width: 30%;
@@ -20,10 +16,9 @@
     text-align: center;
     padding-top: 3%;
     padding-bottom: 4%;
-
 }
+
 .footer{
-    
     border-radius: 5px 5px 5px 5px;
     border: 1px solid #c3c3c3;
     margin-top:1%;

@@ -21,7 +21,7 @@ class Login extends Component{
                     </Row>
                     <Row center="xs"> 
                         <Col className="footer" xs={10} md={3}>
-                            @2018 nucleus
+                            @2019 nucleus Administrator
                         </Col>
                     </Row>
                     <Row>

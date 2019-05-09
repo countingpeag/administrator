@@ -1,9 +1,6 @@
 import React from 'react';
 import decode from 'jwt-decode'; //npm install jwt-decode
-import{ BrowserRouter,
-        Route,
-        Switch,
-        Redirect } from 'react-router-dom';//npm install react-router-dom
+import{ BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';//npm install react-router-dom
 import Profile from './components/Profile';
 import StudentValidation from './components/StudentValidation';
 import Statistics from './components/Statistics';
@@ -47,7 +44,7 @@ const App = () => {
     return (
         <BrowserRouter >
             <Switch>
-                <Route exact path="/"     render={props => <Login {...props}/>}/>
+                <Route exact path="/" render={props => <Login {...props}/>}/>
                 <AuthRoute exact path="/home" component={News}/>
                 <AuthRoute exact path="/profile" component={Profile}/>
                 <AuthRoute exact path="/validation" component={StudentValidation}/>
