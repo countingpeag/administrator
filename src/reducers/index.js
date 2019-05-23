@@ -9,7 +9,7 @@ import { validationStudentsData, validationOptionsData, sentStudentsValidation, 
 import { searchStudent, studentInfo, deleteStudent, deleteResponse } from './Students';
 import { searchSubject, subjectInfo, updateSubject, updateSubjectResponse, addSubject, addSubjectResponse } from './Subjects';
 import { teacherInfo, updateTeacher } from './TeacherReducer';
-import { candidatesData } from './CandidatesReducer';
+import { candidatesData, candidateSelectionRequest, candidatesSelected } from './CandidatesReducer';
 
 export default combineReducers({
     changedPassword,
@@ -42,5 +42,7 @@ export default combineReducers({
     addSubjectResponse,
     teacherInfo,
     updateTeacher,
-    candidatesData
+    candidatesData,
+    candidatesSelected,
+    candidateSelectionRequest
 }); 

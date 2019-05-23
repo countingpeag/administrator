@@ -15,8 +15,8 @@ class DroppableDetailed extends Component {
                                 style={getListStyle(snapshot.isDraggingOver)}>
                                 {items.map((item, index) => (
                                     <Draggable
-                                        key={item.id}
-                                        draggableId={item.id}
+                                        key={item.idCandidate}
+                                        draggableId={item.idCandidate}
                                         index={index}>
                                         {(provided, snapshot) => (
                                             <div
@@ -27,7 +27,7 @@ class DroppableDetailed extends Component {
                                                     snapshot.isDragging,
                                                     provided.draggableProps.style
                                                 )}>
-                                                {item.content}
+                                                {item.candidateName}
                                             </div>
                                         )}
                                     </Draggable>

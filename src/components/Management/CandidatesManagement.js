@@ -2,20 +2,13 @@ import React, { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
-import { getCandidates } from '../../actions';
+import { getCandidates, getCandidateSelection } from '../../actions';
 import Button from '@material-ui/core/Button';
 import DroppableDetailed from '../Util/Droppable';
 import CandidatesTab from './CandidatesTab';
 import DownloadCandidates from './CandidatesExcel';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-
-// fake data generator
-const getItems = (count, offset = 0) =>
-    Array.from({ length: count }, (v, k) => k).map(k => ({
-        id: `student-${k + offset}`,
-        content: `Estudiante ${k + offset}`
-    }));
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -44,7 +37,7 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 const grid = 8;
 
 const getItemStyle = (isDragging, draggableStyle) => ({
-    // some basic styles to make the items look a bit nicer
+    // some basic styles to make the candidatesNotSelected look a bit nicer
     userSelect: 'none',
     padding: grid * 2,
     margin: `0 0 ${grid}px 0`,
@@ -66,17 +59,15 @@ class CandidatesManagement extends Component {
     constructor(){
         super();
         this.state = {
-            items: getItems(10),
-            morning1: getItems(5, 10),
-            morning2: getItems(5, 15),
-            morning3: getItems(5, 20),
-            morning4: getItems(5, 25),
-            morning5: getItems(5, 30),
-            afternoon1: getItems(5, 35),
-            afternoon2: getItems(5, 40),
-            afternoon3: getItems(5, 45),
-            afternoon4: getItems(5, 50),
-            afternoon5: getItems(5, 55)
+            candidatesNotSelected: [],
+            morningElectronica: [],
+            morningClinico: [],
+            morningQuimico: [],
+            morningAutomotriz: [],
+            afternoonElectronica: [],
+            afternoonClinico: [],
+            afternoonQuimico: [],
+            afternoonAutomotriz: [],
         };
 
         this.candidatesPDF = this.candidatesPDF.bind(this);
@@ -88,17 +79,15 @@ class CandidatesManagement extends Component {
      * source arrays stored in the state.
      */
     id2List = {
-        items: 'items',
-        droppable1: 'morning1',
-        droppable2: 'morning2',
-        droppable3: 'morning3',
-        droppable4: 'morning4',
-        droppable5: 'morning5',
-        droppable6: 'afternoon1',
-        droppable7: 'afternoon2',
-        droppable8: 'afternoon3',
-        droppable9: 'afternoon4',
-        droppable10: 'afternoon5',
+        candidatesNotSelected: 'candidatesNotSelected',
+        morningElectronica: 'morningElectronica',
+        morningClinico: 'morningClinico',
+        morningQuimico: 'morningQuimico',
+        morningAutomotriz: 'morningAutomotriz',
+        afternoonElectronica: 'afternoonElectronica',
+        afternoonClinico: 'afternoonClinico',
+        afternoonQuimico: 'afternoonQuimico',
+        afternoonAutomotriz: 'afternoonAutomotriz',
     };
 
     getList = id => this.state[this.id2List[id]];
@@ -112,43 +101,37 @@ class CandidatesManagement extends Component {
         }
 
         if (source.droppableId === destination.droppableId) {
-            const items = reorder(
+            const candidatesNotSelected = reorder(
                 this.getList(source.droppableId),
                 source.index,
                 destination.index
             );
 
-            let state = { items };
+            let state = { candidatesNotSelected };
 
-            if (source.droppableId === 'droppable1') {
-                state = { droppable1: items };
+            if (source.droppableId === 'morningElectronica') {
+                state = { morningElectronica: candidatesNotSelected };
             }
-            if (source.droppableId === 'droppable2') {
-                state = { droppable2: items };
+            if (source.droppableId === 'morningClinico') {
+                state = { morningClinico: candidatesNotSelected };
             }
-            if (source.droppableId === 'droppable3') {
-                state = { droppable3: items };
+            if (source.droppableId === 'morningQuimico') {
+                state = { morningQuimico: candidatesNotSelected };
             }
-            if (source.droppableId === 'droppable4') {
-                state = { droppable4: items };
+            if (source.droppableId === 'morningAutomotriz') {
+                state = { morningAutomotriz: candidatesNotSelected };
             }
-            if (source.droppableId === 'droppable5') {
-                state = { droppable5: items };
+            if (source.droppableId === 'afternoonElectronica') {
+                state = { afternoonElectronica: candidatesNotSelected };
             }
-            if (source.droppableId === 'droppable6') {
-                state = { droppable6: items };
+            if (source.droppableId === 'afternoonClinico') {
+                state = { afternoonClinico: candidatesNotSelected };
             }
-            if (source.droppableId === 'droppable7') {
-                state = { droppable7: items };
+            if (source.droppableId === 'afternoonQuimico') {
+                state = { afternoonQuimico: candidatesNotSelected };
             }
-            if (source.droppableId === 'droppable8') {
-                state = { droppable8: items };
-            }
-            if (source.droppableId === 'droppable9') {
-                state = { droppable9: items };
-            }
-            if (source.droppableId === 'droppable10') {
-                state = { droppable10: items };
+            if (source.droppableId === 'afternoonAutomotriz') {
+                state = { afternoonAutomotriz: candidatesNotSelected };
             }
 
             this.setState(state);
@@ -160,94 +143,76 @@ class CandidatesManagement extends Component {
                 destination
             );
 
-            if((source.droppableId==="items" && destination.droppableId==="droppable1") || (source.droppableId==="droppable1" && destination.droppableId==="items")){
+            if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="morningElectronica") || (source.droppableId==="morningElectronica" && destination.droppableId==="candidatesNotSelected")){
                 this.setState({
-                    items: result.items,
-                    morning1: result.droppable1
+                    candidatesNotSelected: result.candidatesNotSelected,
+                    morningElectronica: result.morningElectronica
                 });
             }
-            else if((source.droppableId==="items" && destination.droppableId==="droppable2") || (source.droppableId==="droppable2" && destination.droppableId==="items")){
+            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="morningClinico") || (source.droppableId==="morningClinico" && destination.droppableId==="candidatesNotSelected")){
                 this.setState({
-                    items: result.items,
-                    morning2: result.droppable2
+                    candidatesNotSelected: result.candidatesNotSelected,
+                    morningClinico: result.morningClinico
                 });
             }
-            else if( (source.droppableId==="items" && destination.droppableId==="droppable3") || (source.droppableId==="droppable3" && destination.droppableId==="items")) {
+            else if( (source.droppableId==="candidatesNotSelected" && destination.droppableId==="morningQuimico") || (source.droppableId==="morningQuimico" && destination.droppableId==="candidatesNotSelected")) {
                 this.setState({
-                    items: result.items,
-                    morning3: result.droppable3
+                    candidatesNotSelected: result.candidatesNotSelected,
+                    morningQuimico: result.morningQuimico
                 });
             }
-            else if((source.droppableId==="items" && destination.droppableId==="droppable4") || (source.droppableId==="droppable4" && destination.droppableId==="items")){
+            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="morningAutomotriz") || (source.droppableId==="morningAutomotriz" && destination.droppableId==="candidatesNotSelected")){
                 this.setState({
-                    items: result.items,
-                    morning4: result.droppable4
+                    candidatesNotSelected: result.candidatesNotSelected,
+                    morningAutomotriz: result.morningAutomotriz
                 });
             }
-            else if((source.droppableId==="items" && destination.droppableId==="droppable5") || (source.droppableId==="droppable5" && destination.droppableId==="items")){
+            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="afternoonElectronica") || (source.droppableId==="afternoonElectronica" && destination.droppableId==="candidatesNotSelected")){
                 this.setState({
-                    items: result.items,
-                    morning5: result.droppable5
+                    candidatesNotSelected: result.candidatesNotSelected,
+                    afternoonElectronica: result.afternoonElectronica
                 });
             }
-            else if((source.droppableId==="items" && destination.droppableId==="droppable6") || (source.droppableId==="droppable6" && destination.droppableId==="items")){
+            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="afternoonClinico") || (source.droppableId==="afternoonClinico" && destination.droppableId==="candidatesNotSelected")){
                 this.setState({
-                    items: result.items,
-                    afternoon1: result.droppable6
+                    candidatesNotSelected: result.candidatesNotSelected,
+                    afternoonClinico: result.afternoonClinico
                 });
             }
-            else if((source.droppableId==="items" && destination.droppableId==="droppable7") || (source.droppableId==="droppable7" && destination.droppableId==="items")){
+            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="afternoonQuimico") || (source.droppableId==="afternoonQuimico" && destination.droppableId==="candidatesNotSelected")){
                 this.setState({
-                    items: result.items,
-                    afternoon2: result.droppable7
+                    candidatesNotSelected: result.candidatesNotSelected,
+                    afternoonQuimico: result.afternoonQuimico
                 });
             }
-            else if((source.droppableId==="items" && destination.droppableId==="droppable8") || (source.droppableId==="droppable8" && destination.droppableId==="items")){
+            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="afternoonAutomotriz") || (source.droppableId==="afternoonAutomotriz" && destination.droppableId==="candidatesNotSelected")){
                 this.setState({
-                    items: result.items,
-                    afternoon3: result.droppable8
+                    candidatesNotSelected: result.candidatesNotSelected,
+                    afternoonAutomotriz: result.afternoonAutomotriz
                 });
             }
-            else if((source.droppableId==="items" && destination.droppableId==="droppable9") || (source.droppableId==="droppable9" && destination.droppableId==="items")){
+            else if((source.droppableId==="morningElectronica" && destination.droppableId==="afternoonElectronica") || (source.droppableId==="afternoonElectronica" && destination.droppableId==="morningElectronica")){
                 this.setState({
-                    items: result.items,
-                    afternoon4: result.droppable9
+                    morningElectronica: result.morningElectronica,
+                    afternoonElectronica: result.afternoonElectronica
                 });
             }
-            else if((source.droppableId==="items" && destination.droppableId==="droppable10") || (source.droppableId==="droppable10" && destination.droppableId==="items")){
+            else if((source.droppableId==="morningClinico" && destination.droppableId==="afternoonClinico") || (source.droppableId==="afternoonClinico" && destination.droppableId==="morningClinico")){
                 this.setState({
-                    items: result.items,
-                    afternoon5: result.droppable10
+                    morningClinico: result.morningClinico,
+                    afternoonClinico: result.afternoonClinico
                 });
             }
-            else if((source.droppableId==="droppable1" && destination.droppableId==="droppable6") || (source.droppableId==="droppable6" && destination.droppableId==="droppable1")){
+            else if((source.droppableId==="morningQuimico" && destination.droppableId==="afternoonQuimico") || (source.droppableId==="afternoonQuimico" && destination.droppableId==="morningQuimico")){
                 this.setState({
-                    morning1: result.droppable1,
-                    afternoon1: result.droppable6
+                    morningQuimico: result.morningQuimico,
+                    afternoonQuimico: result.afternoonQuimico
                 });
             }
-            else if((source.droppableId==="droppable2" && destination.droppableId==="droppable7") || (source.droppableId==="droppable7" && destination.droppableId==="droppable2")){
+            else if((source.droppableId==="morningAutomotriz" && destination.droppableId==="afternoonAutomotriz") || (source.droppableId==="afternoonAutomotriz" && destination.droppableId==="morningAutomotriz")){
                 this.setState({
-                    morning2: result.droppable2,
-                    afternoon2: result.droppable7
-                });
-            }
-            else if((source.droppableId==="droppable3" && destination.droppableId==="droppable8") || (source.droppableId==="droppable8" && destination.droppableId==="droppable3")){
-                this.setState({
-                    morning3: result.droppable3,
-                    afternoon3: result.droppable8
-                });
-            }
-            else if((source.droppableId==="droppable4" && destination.droppableId==="droppable9") || (source.droppableId==="droppable9" && destination.droppableId==="droppable4")){
-                this.setState({
-                    morning4: result.droppable4,
-                    afternoon4: result.droppable9
-                });
-            }
-            else if((source.droppableId==="droppable5" && destination.droppableId==="droppable10") || (source.droppableId==="droppable10" && destination.droppableId==="droppable5")){
-                this.setState({
-                    morning5: result.droppable5,
-                    afternoon5: result.droppable10
+                    morningAutomotriz: result.morningAutomotriz,
+                    afternoonAutomotriz: result.afternoonAutomotriz
                 });
             }
         }
@@ -343,24 +308,31 @@ class CandidatesManagement extends Component {
             }
         });
         doc.save('test.pdf');
-    }
+    }                           
 
     componentDidMount(){
         this.props.getCandidates();
+        this.props.getCandidateSelection();
+    }
+
+    componentWillReceiveProps(props){
+        if(props.candidatesSelected.candidatesNotSelected!==undefined)
+            this.setState(props.candidatesSelected);
     }
         
     render() {
+        console.log(this.state)
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <Grid>
                     <Row>
                         <Col xs={3}>
                             <Row center="xs" className="topSpace">    
-                                <DownloadCandidates data={this.props.candidatesData}/>
+                                {/*<DownloadCandidates data={this.props.candidatesData}/>*/}
                             </Row>
                             <Row center="xs">
                                 <Col xs={12} id="limitTen">
-                                    <DroppableDetailed getItemStyle={getItemStyle} getListStyle={getListStyle} items={this.state.items} droppableId="items" />
+                                    <DroppableDetailed getItemStyle={getItemStyle} getListStyle={getListStyle} items={this.state.candidatesNotSelected} droppableId="candidatesNotSelected" />
                                 </Col>
                             </Row>
                             <Row center="xs" className="bottomSpace">
@@ -384,11 +356,13 @@ class CandidatesManagement extends Component {
 }
 
 const mapStateToProps = state => ({
-    candidatesData: state.candidatesData
+    candidatesData: state.candidatesData,
+    candidatesSelected: state.candidatesSelected
 });
 
 const mapDispatchToProps = dispatch => ({
-    getCandidates: () => dispatch(getCandidates())
+    getCandidates: () => dispatch(getCandidates()),
+    getCandidateSelection: () => dispatch(getCandidateSelection())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CandidatesManagement);

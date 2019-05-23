@@ -397,9 +397,13 @@ export const saveOrupdateTecher = payload => {
 
 
 //Candidates actions
+export const GET_CANDIDATES_SELECTED = "GET_CANDIDATES_SELECTED";
+export const GET_CANDIDATES_SELECTED_REQUEST = "GET_CANDIDATES_SELECTED_REQUEST";
 export const GET_CANDIDATES = "GET_CANDIDATES";
 
 const candidates = payload => ({type:GET_CANDIDATES, payload:payload});
+const candidateSelection = payload => ({type:GET_CANDIDATES_SELECTED, payload:payload});
+const candidateSelectionRequest = payload => ({type:GET_CANDIDATES_SELECTED_REQUEST, payload:payload});
 
 export const getCandidates = payload => {
     return dispatch => {
@@ -413,3 +417,19 @@ export const getCandidates = payload => {
 
     };
 };
+
+export const getCandidateSelection = payload => {
+    return dispatch => {
+        dispatch(candidateSelectionRequest(true));
+        axios.get(`http://localhost:8080/nucleus/candidates/candidatesSelection`)
+        .then( ({data}) => {
+            dispatch(candidateSelection(data));
+            dispatch(candidateSelectionRequest(false));
+        })
+        .catch( error => {
+            console.log(error);
+            dispatch(candidateSelectionRequest(false));
+        });
+    };
+};
+

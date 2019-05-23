@@ -48,14 +48,12 @@ class CandidatesTab extends Component {
                                 <Tab label="LABORATORIO CLÍNICO" />
                                 <Tab label="LABORATORISTA QUÍMICO" />
                                 <Tab label="MANTENIMIENTO AUTOMOTRIZ" />
-                                <Tab label="LABORATORISTA CLÍNICO" />
                             </Tabs>
                         </AppBar>
-                        {value === 0 && <DrappableContainer getItemStyle={getItemStyle} getListStyle={getListStyle} morning={data.morning1} afternoon={data.afternoon1}  droppableMorning="droppable1" droppableAfternoon="droppable6"/>}
-                        {value === 1 && <DrappableContainer getItemStyle={getItemStyle} getListStyle={getListStyle} morning={data.morning2} afternoon={data.afternoon2}  droppableMorning="droppable2" droppableAfternoon="droppable7"/>}
-                        {value === 2 && <DrappableContainer getItemStyle={getItemStyle} getListStyle={getListStyle} morning={data.morning3} afternoon={data.afternoon3}  droppableMorning="droppable3" droppableAfternoon="droppable8"/>}
-                        {value === 3 && <DrappableContainer getItemStyle={getItemStyle} getListStyle={getListStyle} morning={data.morning4} afternoon={data.afternoon4}  droppableMorning="droppable4" droppableAfternoon="droppable9"/>}
-                        {value === 4 && <DrappableContainer getItemStyle={getItemStyle} getListStyle={getListStyle} morning={data.morning5} afternoon={data.afternoon5}  droppableMorning="droppable5" droppableAfternoon="droppable10"/>}
+                        {value === 0 && <DrappableContainer getItemStyle={getItemStyle} getListStyle={getListStyle} morning={data.morningElectronica} afternoon={data.afternoonElectronica}  droppableMorning="morningElectronica" droppableAfternoon="afternoonElectronica"/>}
+                        {value === 1 && <DrappableContainer getItemStyle={getItemStyle} getListStyle={getListStyle} morning={data.morningClinico} afternoon={data.afternoonClinico}  droppableMorning="morningClinico" droppableAfternoon="afternoonClinico"/>}
+                        {value === 2 && <DrappableContainer getItemStyle={getItemStyle} getListStyle={getListStyle} morning={data.morningQuimico} afternoon={data.afternoonQuimico}  droppableMorning="morningQuimico" droppableAfternoon="afternoonQuimico"/>}
+                        {value === 3 && <DrappableContainer getItemStyle={getItemStyle} getListStyle={getListStyle} morning={data.morningAutomotriz} afternoon={data.afternoonAutomotriz}  droppableMorning="morningAutomotriz" droppableAfternoon="afternoonAutomotriz"/>}
                         </Row>
                     </Col>
                 </Row>
