@@ -69,8 +69,7 @@ class CandidatesManagement extends Component {
             afternoonQuimico: [],
             afternoonAutomotriz: [],
         };
-
-        this.candidatesPDF = this.candidatesPDF.bind(this);
+        this.downloadFile = this.downloadFile.bind(this);
     }
 
     /**
@@ -218,7 +217,26 @@ class CandidatesManagement extends Component {
         }
     };
 
+    convertDataToObject(array){
+        return array.map( candidate => {
+            const { idCandidate, candidateName, candidateLastNameFather, candidateLastNameMother, 
+                candidateAge, candidateScore, preference} = candidate;
+                return  {
+                    id: idCandidate,
+                    name: candidateName,
+                    lastname: `${candidateLastNameFather} ${candidateLastNameMother}`,
+                    age: candidateAge,
+                    score: candidateScore,
+                    shift: preference.preferencesShiftWished
+                };
+        });
+    }
+
     downloadFile() {
+
+        const { morningElectronica, morningClinico, morningQuimico, morningAutomotriz, afternoonElectronica,
+                afternoonClinico, afternoonQuimico, afternoonAutomotriz, } = this.state;
+
         const columns = [
         {title: "ID", dataKey: "id"},
         {title: "Nombre", dataKey: "name"},
@@ -228,87 +246,116 @@ class CandidatesManagement extends Component {
         {title: "turno", dataKey: "shift"}
         ];
 
-        const rows = [
-        {"id": 1, "name": "Shaw", "lastname": "Palma", "age": "18", "score":"70", "shift": "M"},
-        {"id": 2, "name": "Shaw", "lastname": "Nuñez", "age": "17", "score":"56", "shift": "M"},
-        {"id": 3, "name": "Shaw", "lastname": "Perez", "age": "17", "score":"45", "shift": "M"},
-        {"id": 4, "name": "Shaw", "lastname": "Macias", "age": "15", "score":"35", "shift": "M"},
-        {"id": 5, "name": "Shaw", "lastname": "Garcia", "age": "16", "score":"20", "shift": "M"},
-        {"id": 6, "name": "Shaw", "lastname": "Albarado", "age": "15", "score":"70", "shift": "M"}
-        ];
+        const electronica1 = this.convertDataToObject(morningElectronica);
+        const clinico1 = this.convertDataToObject(morningClinico);
+        const quimico1 = this.convertDataToObject(morningQuimico);
+        const automotriz1 = this.convertDataToObject(morningAutomotriz);
+        const electronica2 = this.convertDataToObject(afternoonElectronica);
+        const clinico2 = this.convertDataToObject(afternoonClinico);
+        const quimico2 = this.convertDataToObject(afternoonQuimico);
+        const automotriz2 = this.convertDataToObject(afternoonAutomotriz);
         
         var doc = new jsPDF('p', 'pt');
-        doc.autoTable(columns, rows, {
+        doc.autoTable(columns, electronica1, {
             styles: {fillColor: [164, 164, 164]},
                 columnStyles: {
                 id: {fillColor: 255}
             },
             margin: {top: 60},
-            addPageContent: function(data) {
-                doc.text("Especialidad 1", 40, 30);
+            didDrawPage: function(data) {
+                doc.text("ELECTRÓNICA", 40, 30);
+                doc.text("Matutino", 470, 30);
             }
         });
         doc.addPage();
-        doc.autoTable(columns, rows, {
+        doc.autoTable(columns, clinico1, {
             styles: {fillColor: [164, 164, 164]},
                 columnStyles: {
                 id: {fillColor: 255}
             },
             margin: {top: 60},
-            addPageContent: function(data) {
-                doc.text("Especialidad 2", 40, 30);
+            didDrawPage : function(data) {
+                doc.text("LABORATORIO CLÍNICO", 40, 30);
+                doc.text("Matutino", 470, 30);
             }
         });
         doc.addPage();
-        doc.autoTable(columns, rows, {
+        doc.autoTable(columns, quimico1, {
             styles: {fillColor: [164, 164, 164]},
                 columnStyles: {
                 id: {fillColor: 255}
             },
             margin: {top: 60},
-            addPageContent: function(data) {
-                doc.text("Especialidad 3", 40, 30);
+            didDrawPage: function(data) {
+                doc.text("LABORATORISTA QUÍMICO", 40, 30);
+                doc.text("Matutino", 470, 30);
             }
         });
         doc.addPage();
-        doc.autoTable(columns, rows, {
+        doc.autoTable(columns, automotriz1, {
             styles: {fillColor: [164, 164, 164]},
                 columnStyles: {
                 id: {fillColor: 255}
             },
             margin: {top: 60},
-            addPageContent: function(data) {
-                doc.text("Especialidad 4", 40, 30);
+            didDrawPage: function(data) {
+                doc.text("MANTENIMIENTO AUTOMOTRIZ", 40, 30);
+                doc.text("Matutino", 470, 30);
             }
         });
+
+        doc.addPage();
+        doc.autoTable(columns, electronica2, {
+            styles: {fillColor: [164, 164, 164]},
+                columnStyles: {
+                id: {fillColor: 255}
+            },
+            margin: {top: 60},
+            didDrawPage: function(data) {
+                doc.text("ELECTRÓNICA", 40, 30);
+                doc.text("Vespertino", 470, 30);
+            }
+        });
+        doc.addPage();
+        doc.autoTable(columns, clinico2, {
+            styles: {fillColor: [164, 164, 164]},
+                columnStyles: {
+                id: {fillColor: 255}
+            },
+            margin: {top: 60},
+            didDrawPage: function(data) {
+                doc.text("LABORATORIO CLÍNICO", 40, 30);
+                doc.text("Vespertino", 470, 30);
+            }
+        });
+
+        doc.addPage();
+        doc.autoTable(columns, quimico2, {
+            styles: {fillColor: [164, 164, 164]},
+                columnStyles: {
+                id: {fillColor: 255}
+            },
+            margin: {top: 60},
+            didDrawPage: function(data) {
+                doc.text("LABORATORISTA QUÍMICO", 40, 30);
+                doc.text("Vespertino", 470, 30);
+            }
+        });
+        doc.addPage();
+        doc.autoTable(columns, automotriz2, {
+            styles: {fillColor: [164, 164, 164]},
+                columnStyles: {
+                id: {fillColor: 255}
+            },
+            margin: {top: 60},
+            didDrawPage: function(data) {
+                doc.text("MANTENIMIENTO AUTOMOTRIZ", 40, 30);
+                doc.text("Vespertino", 470, 30);
+            }
+        });
+
         doc.save('test.pdf');
-    }
-
-    candidatesPDF(){
-        const columns = [
-            {title: "ID", dataKey: "idCandidate"},
-            {title: "Nombre", dataKey: "candidateName"},
-            {title: "Apellidos", dataKey: "candidateLastNameFather"},
-            {title: "Edad", dataKey: "candidateAge"},
-            {title: "Calificacion", dataKey: "candidateScore"},
-            {title: "Telefono", dataKey: "candidatePersonalPhone"}
-            ];
-
-        const rows = this.props.candidatesData;
-
-        var doc = new jsPDF('p', 'pt');
-        doc.autoTable(columns, rows, {
-            styles: {fillColor: [164, 164, 164]},
-                columnStyles: {
-                id: {fillColor: 255}
-            },
-            margin: {top: 60},
-            addPageContent: function(data) {
-                doc.text("Aspirantes", 40, 30);
-            }
-        });
-        doc.save('test.pdf');
-    }                           
+    }                       
 
     componentDidMount(){
         this.props.getCandidates();
@@ -321,14 +368,13 @@ class CandidatesManagement extends Component {
     }
         
     render() {
-        console.log(this.state)
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <Grid>
                     <Row>
                         <Col xs={3}>
                             <Row center="xs" className="topSpace">    
-                                {/*<DownloadCandidates data={this.props.candidatesData}/>*/}
+                                <DownloadCandidates data={this.props.candidatesData}/>
                             </Row>
                             <Row center="xs">
                                 <Col xs={12} id="limitTen">

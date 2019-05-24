@@ -23,8 +23,8 @@ const initialState = {
     searchSubject: false,
     updateSubject: false,
     addSubject: false,
-    teacherInfo: {teacherName: "", teacherLastNameFather:"", teacherLastNameMother:"", teacherRFC:"", teacherGenre:"" ,idInstitute:{instituteName:""}, specialities:[], subjects: []}
-
+    teacherInfo: {teacherName: "", teacherLastNameFather:"", teacherLastNameMother:"", teacherRFC:"", teacherGenre:"" ,idInstitute:{instituteName:""}, specialities:[], subjects: []},
+    candidatesData: []
 }
 
 const composeEnhencers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
