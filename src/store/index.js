@@ -24,7 +24,8 @@ const initialState = {
     updateSubject: false,
     addSubject: false,
     teacherInfo: {teacherName: "", teacherLastNameFather:"", teacherLastNameMother:"", teacherRFC:"", teacherGenre:"" ,idInstitute:{instituteName:""}, specialities:[], subjects: []},
-    candidatesData: []
+    candidatesData: [],
+    updateCandidatesSelection: false
 }
 
 const composeEnhencers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

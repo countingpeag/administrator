@@ -400,10 +400,12 @@ export const saveOrupdateTecher = payload => {
 export const GET_CANDIDATES_SELECTED = "GET_CANDIDATES_SELECTED";
 export const GET_CANDIDATES_SELECTED_REQUEST = "GET_CANDIDATES_SELECTED_REQUEST";
 export const GET_CANDIDATES = "GET_CANDIDATES";
+export const UPDATE_CANDIDATE_SELECTION = "UPDATE_CANDIDATE_SELECTION";
 
 const candidates = payload => ({type:GET_CANDIDATES, payload:payload});
 const candidateSelection = payload => ({type:GET_CANDIDATES_SELECTED, payload:payload});
 const candidateSelectionRequest = payload => ({type:GET_CANDIDATES_SELECTED_REQUEST, payload:payload});
+const updateSelection = payload => ({type:UPDATE_CANDIDATE_SELECTION, payload:payload});
 
 export const getCandidates = payload => {
     return dispatch => {
@@ -430,6 +432,19 @@ export const getCandidateSelection = payload => {
             console.log(error);
             dispatch(candidateSelectionRequest(false));
         });
+    };
+};
+
+export const updateCandidateSelection = payload => {
+    return dispatch => {
+        dispatch(updateSelection(true));
+        axios.post(`http://localhost:8080/nucleus/candidates/updateCandidateSelection`, payload)
+        .then( ({data}) => {
+            dispatch(updateSelection(!data));
+        })
+        .catch( error => {
+            console.log(error);
+        })
     };
 };
 

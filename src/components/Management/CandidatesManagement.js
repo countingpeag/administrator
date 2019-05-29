@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
-import { getCandidates, getCandidateSelection } from '../../actions';
+import { getCandidates, getCandidateSelection, updateCandidateSelection } from '../../actions';
+import ProgressComponent from '../Util/CircularProgress';
 import Button from '@material-ui/core/Button';
 import DroppableDetailed from '../Util/Droppable';
 import CandidatesTab from './CandidatesTab';
@@ -70,6 +71,7 @@ class CandidatesManagement extends Component {
             afternoonAutomotriz: [],
         };
         this.downloadFile = this.downloadFile.bind(this);
+        this.saveCandidateSelection = this.saveCandidateSelection.bind(this);
     }
 
     /**
@@ -366,6 +368,10 @@ class CandidatesManagement extends Component {
         if(props.candidatesSelected.candidatesNotSelected!==undefined)
             this.setState(props.candidatesSelected);
     }
+
+    saveCandidateSelection(){
+        this.props.updateCandidatesSelection(this.state);
+    }
         
     render() {
         return (
@@ -382,8 +388,9 @@ class CandidatesManagement extends Component {
                                 </Col>
                             </Row>
                             <Row center="xs" className="bottomSpace">
-                                <Col md={4}>
-                                    <Button variant="contained" color="primary" onClick={null}>Guardar</Button>
+                                <Col md={4} className="savebuttonCandidates">
+                                    <Button variant="contained" color="primary" onClick={this.saveCandidateSelection} disabled={this.props.updateSelectionFlag}>Guardar</Button>
+                                    { this.props.updateSelectionFlag && <ProgressComponent size={24}/> }
                                 </Col>
                                 <Col md={4}>
                                     <Button variant="contained" color="secondary" onClick={this.downloadFile}>PDF</Button>
@@ -391,9 +398,8 @@ class CandidatesManagement extends Component {
                             </Row>
                         </Col>
                         <Col xs={9}>
-                            <CandidatesTab getItemStyle={getItemStyle} getListStyle={getListStyle} data={this.state}/>
+                            <CandidatesTab getItemStyle={getItemStyle} getListStyle={getListStyle} data={this.state} />
                         </Col>
-
                     </Row>
                 </Grid>
             </DragDropContext>
@@ -403,12 +409,14 @@ class CandidatesManagement extends Component {
 
 const mapStateToProps = state => ({
     candidatesData: state.candidatesData,
-    candidatesSelected: state.candidatesSelected
+    candidatesSelected: state.candidatesSelected,
+    updateSelectionFlag : state.updateCandidatesSelection
 });
 
 const mapDispatchToProps = dispatch => ({
     getCandidates: () => dispatch(getCandidates()),
-    getCandidateSelection: () => dispatch(getCandidateSelection())
+    getCandidateSelection: () => dispatch(getCandidateSelection()),
+    updateCandidatesSelection: value => dispatch(updateCandidateSelection(value))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CandidatesManagement);
