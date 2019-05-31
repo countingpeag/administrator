@@ -89,10 +89,10 @@ class TeacherAppend extends Component{
             teacherGenre,
             teacherRFC,
             idInstitute:{
-                idInstitute: 2,
-                instituteName: "CBTIS38",
-                instituteAddress: "XXXXXXXXXXXXXXX",
-                institutePhone: "3333333333"
+                idInstitute: 1,
+                instituteName: "CBTIS NO. 38",
+                instituteAddress: null,
+                institutePhone: null
             },
             subjects,
             specialities

@@ -8,7 +8,7 @@ import School from '@material-ui/icons/School';
 import { withStyles } from '@material-ui/core/styles';
 import StudentManagement from './StudentManagement';
 import SubjectManagement from './SubjectManagement';
-import TeacherManagement from './TeacheraManagement';
+import TeacherManagement from './TeacherManagement';
 import CandidatesManagement from './CandidatesManagement';
 import NavBar from '../NavBar';
 import '../../styles/ManagementStyle.css';
