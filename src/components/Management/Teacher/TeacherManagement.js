@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
-import { searchTeacherInfo, saveOrupdateTecher, getData } from '../../actions';
+import { searchTeacherInfo, saveOrupdateTecher, getData } from '../../../actions';
 import TeacherUpdate from './TeacherUpdate';
 import TeacherAppend from './TeacherAppend';
-import '../../styles/TeacherStyle.css';
+import '../../../styles/TeacherStyle.css';
 
 class TeacherManagement extends Component{
 

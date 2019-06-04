@@ -23,7 +23,8 @@ class TeacherAppend extends Component{
             teacherInstitute: '',
             teacherGenre: '',
             specialities: [],
-            subjects: []
+            subjects: [],
+            teacherCompleted: false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -97,15 +98,26 @@ class TeacherAppend extends Component{
             subjects,
             specialities
         };
-        this.props.saveTeacher(teacher);
+
+        if(specialities!=='' && subjects!=='' && teacherName!=='' && teacherLastnameFather!=='' && teacherLastnameMother!=='' && teacherUsername!=='' && teacherRFC!=='' && teacherGenre!=='')
+            this.props.saveTeacher(teacher);
+        else
+            alert("Complete los campos vacios.");
     }
 
     componentDidMount(){
         this.props.speciSubjectsData();
     }
 
+    componentDidUpdate(){
+        const { teacherName, teacherLastnameFather, teacherLastnameMother, teacherUsername, teacherRFC, teacherGenre, teacherCompleted } = this.state;
+
+        if(teacherName!=='' && teacherLastnameFather!=='' && teacherLastnameMother!=='' && teacherUsername!=='' && teacherRFC!=='' && teacherGenre!=='' && teacherCompleted===false)
+            this.setState({teacherCompleted:true});
+    }
+
     render(){
-        const { specialities, subjects, teacherName, teacherLastnameFather, teacherLastnameMother, teacherUsername, teacherRFC, teacherGenre } = this.state;
+        const { specialities, subjects, teacherName, teacherLastnameFather, teacherLastnameMother, teacherUsername, teacherRFC, teacherGenre, teacherCompleted} = this.state;
         const { schoolData } = this.props;
         
         return(
@@ -184,7 +196,7 @@ class TeacherAppend extends Component{
                             </Col>
                         </Row>
                         <Row center="xs">
-                            <Button variant="contained" color="secondary" onClick={this.handleSubmit}>
+                            <Button variant="contained" color="secondary" onClick={this.handleSubmit} disabled={!teacherCompleted}>
                                     Crear
                             </Button>
                         </Row>

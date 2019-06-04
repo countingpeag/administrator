@@ -27,8 +27,11 @@ class ChangePassword extends React.Component {
         newPassword,
         rfc: adminObj.rfc
       }
-      
-      this.props.changed(obj);
+
+      if(oldPassword!=='' && newPassword!=='')
+        this.props.changed(obj);
+      else
+        alert("Complete los campos vacios.");
     }
 
     handleClickOpen = () => {

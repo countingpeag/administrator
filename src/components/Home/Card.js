@@ -104,6 +104,7 @@ class Cards extends React.Component {
 
     //data variable is the data which was send by the index.js file when the component is called
     const { data, classes } = this.props;
+    var date = new Date(data.date);
     return (
       
         <Card className="card">
@@ -114,8 +115,8 @@ class Cards extends React.Component {
               </Avatar>
             }
             title={data.administrator.adminName+" "+data.administrator.adminLastNameFather+" "+data.administrator.adminLastNameMother}
-            subheader={  new Date(data.date).getDate() + "/" + (new Date(data.date).getMonth()+1) +  "/" + new Date(data.date).getFullYear() 
-                      + " " + new Date(data.date).getHours() + ":" + new Date(data.date).getMinutes() + ":" + new Date(data.date).getSeconds()}
+            subheader={  date.getDate() + "/" + (date.getMonth()+1) +  "/" + date.getFullYear() 
+                      + " " + date.getHours() + ":" + date.getMinutes() + ":" +date.getSeconds()}
             
           />
 

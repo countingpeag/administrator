@@ -3,11 +3,11 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import Input from '@material-ui/core/Input';
-import ProgressComponent from '../Util/CircularProgress';
-import { findSubject, updateSubject, addSubject } from '../../actions';
+import ProgressComponent from '../../Util/CircularProgress';
+import { findSubject, updateSubject, addSubject } from '../../../actions';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
-import '../../styles/SubjectStyle.css';
+import '../../../styles/SubjectStyle.css';
 
 class SubjectManagement extends Component{
 

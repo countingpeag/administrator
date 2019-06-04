@@ -57,30 +57,35 @@ class NewNews extends React.Component {
         }
     }
 
-    handleSubmit = (date, time, save) => {
+    handleSubmit = (currentDate, save) => {
 
+        const { content, img64, priotity } = this.state;
+        
         const adminObj = decode(localStorage.getItem('tokenAuth'));
-        //console.log(  this.state.content, (date + 'T' + time+'-06:00 -'),this.state.priotity, adminObj.idAdmin  );
         const objToSend = {
-            newContent: this.state.content,
-            image: this.state.img64,
-            date: date + 'T' + time+'-06:00 ',
-            priority: this.state.priotity,
+            newContent: content,
+            image: img64,
+            date: currentDate,
+            priority: priotity,
             administrator: { idAdministrator: adminObj.idAdministrator }
         }; 
 
         const objToUpdate = {
-            newContent: this.state.content,
-            image: this.state.img64,
-            date: date + 'T' + time+'-06:00 ',
-            priority: this.state.priotity,
+            newContent: content,
+            image: img64,
+            date: currentDate,
+            priority: priotity,
             administrator: adminObj 
         };
 
-        this.props.addNews(objToUpdate);
-        save(objToSend);
-        
-        this.setState({open: false});
+        if(content!=='' && priotity!==''){
+            this.props.addNews(objToUpdate);
+            save(objToSend);
+            
+            this.setState({open: false});
+        }
+        else
+            alert("Complete los campos vacios");
     }
     
     handleOpen(){
@@ -90,6 +95,7 @@ class NewNews extends React.Component {
     handleClose(){
         this.setState({open: false});
     }
+
     selectedIMGChangedHandler = (event) => {
         const file = event.target.files[0]
         this.setState({selectedFile: event.target.files[0]})
@@ -222,7 +228,7 @@ class NewNews extends React.Component {
                 </Grid>
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => this.handleSubmit(date, time, this.props.save)} color="primary">
+                <Button onClick={() => this.handleSubmit(currentdate, this.props.save)} color="primary">
                 Aceptar
                 </Button>
                 <Button onClick={this.handleClose} color="primary" autoFocus>

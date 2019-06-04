@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Grid, Row, Col} from 'react-flexbox-grid'; 
-import DroppableDetailed from '../Util/Droppable';
+import DroppableDetailed from './../../Util/Droppable';
 
 class DrappableContainer extends Component{
     render(){

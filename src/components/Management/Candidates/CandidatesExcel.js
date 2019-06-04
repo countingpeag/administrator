@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactExport from "react-export-excel";
-import CustomButton from '../Util/CustomButton';
+import CustomButton from '../../Util/CustomButton';
 import green from '@material-ui/core/colors/green';
 
 const ExcelFile = ReactExport.ExcelFile;

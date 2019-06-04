@@ -21,9 +21,9 @@ class NewsForm extends Component{
         }     
     }
 
-    handleChange = (item,event,date,time) => {
+    handleChange = (item, event, currentdate) => {
        this.setState({modi:'Y'})
-       item.date = date + 'T' + time+'-06:00 '
+       item.date = currentdate;
         switch(event.target.name){
             case 'priotity':
                 item.priority = event.target.value 
@@ -51,6 +51,7 @@ class NewsForm extends Component{
         this.setState({img64: 'img error'})
         }
     }
+
 
 
     render(){
@@ -92,7 +93,7 @@ class NewsForm extends Component{
                             multiline
                             rowsMax="4"
                             value={itemToModify.newContent}
-                            onChange={(e)=>this.handleChange(itemToModify,e,date,time)}
+                            onChange={(e)=>this.handleChange(itemToModify, e, currentdate)}
                             className="content"
                             margin="normal"
                             />

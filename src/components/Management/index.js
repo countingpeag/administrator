@@ -6,10 +6,10 @@ import Tab from '@material-ui/core/Tab';
 import Book from '@material-ui/icons/Book';
 import School from '@material-ui/icons/School';
 import { withStyles } from '@material-ui/core/styles';
-import StudentManagement from './StudentManagement';
-import SubjectManagement from './SubjectManagement';
-import TeacherManagement from './TeacherManagement';
-import CandidatesManagement from './CandidatesManagement';
+import StudentManagement from './Students/StudentManagement';
+import SubjectManagement from './Subjects/SubjectManagement';
+import TeacherManagement from './Teacher/TeacherManagement';
+import CandidatesManagement from './Candidates/CandidatesManagement';
 import NavBar from '../NavBar';
 import '../../styles/ManagementStyle.css';
 

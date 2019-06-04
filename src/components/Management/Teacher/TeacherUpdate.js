@@ -105,7 +105,7 @@ class TeacherUpdate extends Component{
     }
 
     render(){
-        const { teacherInfo, schoolData } = this.props;
+        const { teacherInfo, schoolData, teacherRequest } = this.props;
         const { specialitiesToUpdate, subjectsToUpdate, updateName, updateLastnameFather, updateLastnameMother, updateRFC, updateInstitute } = this.state;
         return(
             <Grid>
@@ -173,7 +173,7 @@ class TeacherUpdate extends Component{
                             <TeacherSubjectAggregations subjects={subjectsToUpdate} allSubjects={schoolData.subjects} addSubject={this.handleAdd} removeSubject={this.handleRemove} />
                         </Row>
                         <Row center="xs">
-                            <Button variant="contained" color="secondary" onClick={this.handleSubmit}>
+                            <Button variant="contained" color="secondary" onClick={this.handleSubmit} disabled={!teacherRequest}>
                                     Guardar
                             </Button>
                         </Row>
@@ -185,7 +185,8 @@ class TeacherUpdate extends Component{
 }
 
 const mapStateToProps = state => ({
-    schoolData: state.StatisticsformData
+    schoolData: state.StatisticsformData,
+    teacherRequest: state.teacherSearchRequest
 });
 
 export default connect(mapStateToProps,null)(TeacherUpdate);

@@ -366,12 +366,15 @@ export const addSubject = payload => {
 //Teacher Actions
 export const SEARCH_TEACHER_NAME = "SEARCH_TEACHER_NAME";
 export const UPDATE_TEACHER_DATA = "UPDATE_TEACHER_DATA";
+export const SEARCH_TEACHER_REQUEST = "SEARCH_TEACHER_REQUEST";
 
 const searchByName = payload => ({type: SEARCH_TEACHER_NAME, payload: payload});
 const updateTeacher = payload => ({type: UPDATE_TEACHER_DATA, payload:payload});
+const searchTeacherRequest = payload => ({type: SEARCH_TEACHER_REQUEST, payload:payload});
 
 export const searchTeacherInfo = payload => {
     return dispatch => {
+        dispatch(searchTeacherRequest(true));
         axios.get(`http://localhost:8080/nucleus/teacher/getTeacher/${payload}/${localStorage.getItem("tokenAuth")}`)
         .then( ({data}) => {
             if(data!=="")
@@ -379,6 +382,7 @@ export const searchTeacherInfo = payload => {
         })
         .catch( error => {
             console.log(error);
+            dispatch(searchTeacherRequest(false));
         })
     };
 };

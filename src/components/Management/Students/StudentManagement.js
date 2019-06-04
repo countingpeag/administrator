@@ -3,9 +3,9 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux'; 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import ProgressComponent from '../Util/CircularProgress';
-import { getTuition, deleteStud } from '../../actions'; 
-import '../../styles/StudentsStyle.css';
+import ProgressComponent from '../../Util/CircularProgress';
+import { getTuition, deleteStud } from '../../../actions'; 
+import '../../../styles/StudentsStyle.css';
 
 class StudentManagement extends Component{
 
