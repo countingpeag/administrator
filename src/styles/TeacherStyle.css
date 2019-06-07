@@ -9,6 +9,11 @@
     padding-left: 3%;
 }
 
+.progressButton{
+    margin-top: 5%;
+    position: relative;
+}
+
 .color1{
     background-color: indianred;
 }

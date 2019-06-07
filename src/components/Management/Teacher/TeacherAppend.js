@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import TeacherSpecialtyAggregations from './TeacherSpecialtyAggregations';
 import TeacherSubjectAggregations from './TeacherSubjectAggregations';
+import ProgressComponent from './../../Util/CircularProgress';
 
 class TeacherAppend extends Component{
 
@@ -118,7 +119,7 @@ class TeacherAppend extends Component{
 
     render(){
         const { specialities, subjects, teacherName, teacherLastnameFather, teacherLastnameMother, teacherUsername, teacherRFC, teacherGenre, teacherCompleted} = this.state;
-        const { schoolData } = this.props;
+        const { schoolData, saveTeacherRequest } = this.props;
         
         return(
             <Grid>
@@ -195,10 +196,11 @@ class TeacherAppend extends Component{
                                 <TeacherSubjectAggregations subjects={subjects} allSubjects={schoolData.subjects} addSubject={this.handleAdd} removeSubject={this.handleRemove} />
                             </Col>
                         </Row>
-                        <Row center="xs">
-                            <Button variant="contained" color="secondary" onClick={this.handleSubmit} disabled={!teacherCompleted}>
+                        <Row center="xs" className="progressButton">
+                            <Button variant="contained" color="secondary" onClick={this.handleSubmit} disabled={!teacherCompleted || saveTeacherRequest}>
                                     Crear
                             </Button>
+                            { saveTeacherRequest && <ProgressComponent size={24} />}
                         </Row>
                     </Col>
                 </Row>
@@ -208,7 +210,8 @@ class TeacherAppend extends Component{
 }
 
 const mapStateToProps = state => ({
-    schoolData: state.StatisticsformData
+    schoolData: state.StatisticsformData,
+    saveTeacherRequest: state.saveTeacherRequest
 });
 
 export default connect(mapStateToProps, null)(TeacherAppend);

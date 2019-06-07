@@ -19,7 +19,8 @@
 
 .saveSubject{
     padding-left: 4%;
-    padding-bottom: 4%;
+    width: 20%;
+    position: relative;
 }
 
 .infoModule{

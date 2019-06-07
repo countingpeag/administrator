@@ -90,7 +90,6 @@ export const statisticsData = payload => {
 }
 export const getData = () => {
     return dispatch => {
-        
         axios.get("http://localhost:8080/nucleus/statistics")
         .then(({data}) => {
             dispatch(setData(data));
@@ -254,7 +253,7 @@ export const sendStudentsValidation = payload => {
 };
 
 
-//Alumnado actions
+//Students actions
 export const SEARCH_STUDENT = "SEARCH_STUDENT";
 export const STUDENT_INFO = "STUDENT_INFO";
 export const DELETE_STUDENT = "DELETE_STUDENT";
@@ -273,11 +272,13 @@ export const getTuition = payload => {
         .then( ({data}) => {
             if(data!=="")
                 dispatch(studentInfo(data));
+            else
+                alert(`El estudiante (${payload.tuition}) no se encuentra.`);
 
             dispatch(searchStudent(false));
         })
         .catch( error => {
-            alert("Upps!! Algo salio mal. Intente mas tarde");
+            alert("Hubo un problema al buscar el estudiante. Intente mas tarde");
             dispatch(searchStudent(false));
         });
     };
@@ -293,7 +294,7 @@ export const deleteStud = payload => {
             dispatch(deleteStudent(false));
         })
         .catch( error => {
-            alert("Upps!! Algo salio mal. Intente mas tarde");
+            alert("Hubo un problema al remover el estudiante. Intente mas tarde.");
             dispatch(deleteStudent(false));
         });
         
@@ -322,7 +323,11 @@ export const findSubject = payload => {
         
         axios.post(`http://localhost:8080/nucleus/admin/getSubject/${localStorage.getItem("tokenAuth")}`, payload, {headers: {'content-type': 'text/plain'}})
         .then( ({data}) => {
-            dispatch(subjectInfo(data));
+            if(data==="")
+                alert(`La materia ${payload} no se encontro.`);
+            else
+                dispatch(subjectInfo(data));
+            
             dispatch(searchSubject(false));
         })
         .catch( error => {
@@ -338,10 +343,13 @@ export const updateSubject = payload => {
         dispatch(updateSubject1(true));
         axios.put(`http://localhost:8080/nucleus/admin/updateSubject/${localStorage.getItem("tokenAuth")}`, payload)
         .then( ({data}) => {
+            if(data)
+                alert("La materia se actualizo correctamente.");
             dispatch(updateSubjectResponse(data));
             dispatch(updateSubject1(false));
         })
         .catch( error => {
+            alert("Hubo un problema al actualizar la maeria. Intente mas tarde.");
             dispatch(updateSubject1(false));
         })
     };
@@ -366,10 +374,16 @@ export const addSubject = payload => {
 //Teacher Actions
 export const SEARCH_TEACHER_NAME = "SEARCH_TEACHER_NAME";
 export const UPDATE_TEACHER_DATA = "UPDATE_TEACHER_DATA";
+export const UPDATE_TEACHER_REQUEST = "UPDATE_TEACHER_REQUEST";
+export const SAVE_TEACHER = "SAVE_TEACHER";
+export const SAVE_TEACHER_REQUEST = "SAVE_TEACHER_REQUEST";
 export const SEARCH_TEACHER_REQUEST = "SEARCH_TEACHER_REQUEST";
 
 const searchByName = payload => ({type: SEARCH_TEACHER_NAME, payload: payload});
 const updateTeacher = payload => ({type: UPDATE_TEACHER_DATA, payload:payload});
+const updateTeacherRequest = payload => ({type: UPDATE_TEACHER_REQUEST, payload:payload});
+const saveTeacher = payload => ({type: SAVE_TEACHER, payload:payload});
+const saveTeacherRequest = payload => ({type: SAVE_TEACHER_REQUEST, payload:payload});
 const searchTeacherRequest = payload => ({type: SEARCH_TEACHER_REQUEST, payload:payload});
 
 export const searchTeacherInfo = payload => {
@@ -379,22 +393,59 @@ export const searchTeacherInfo = payload => {
         .then( ({data}) => {
             if(data!=="")
                 dispatch(searchByName(data));
+            else{
+                dispatch(searchTeacherRequest(false));
+                alert(`El profesor ${payload} no se encontro.`);
+            }
         })
         .catch( error => {
             console.log(error);
+            alert(`Hubo un problema en la busqueda, Intente mas tarde.`);
             dispatch(searchTeacherRequest(false));
         })
     };
 };
 
-export const saveOrupdateTecher = payload => {
+export const updateTecher = payload => {
     return dispatch => {
+        dispatch(updateTeacherRequest(true));
         axios.put(`http://localhost:8080/nucleus/teacher/saveorupdateTeacher/${localStorage.getItem("tokenAuth")}`, payload)
         .then( ({data}) => {
+            if(data===true)
+                alert("La informacion del profesor se actualizo correctamente!");
+            else if(data===false)
+                alert("Hubo un problema al actualizar la informacion, intente mas tarde!");
+            
             dispatch(updateTeacher(data));
+            dispatch(updateTeacherRequest(false));
         })
         .catch( error => {
             console.log(error);
+            alert("Hubo un problema al actualizar la informacion, intente mas tarde!");
+            dispatch(updateTeacher(false));
+            dispatch(updateTeacherRequest(false));
+        });
+    };
+};
+
+export const saveTecher = payload => {
+    return dispatch => {
+        dispatch(saveTeacherRequest(true));
+        axios.put(`http://localhost:8080/nucleus/teacher/saveorupdateTeacher/${localStorage.getItem("tokenAuth")}`, payload)
+        .then( ({data}) => {
+            if(data===true)
+                alert(`El profesor ${payload.teacherName} se guardo correctamente!`);
+            else if(data===false)
+                alert("Hubo un problema al guardar la informacion, intente mas tarde!");
+            
+            dispatch(saveTeacher(data));
+            dispatch(saveTeacherRequest(false));
+        })
+        .catch( error => {
+            console.log(error);
+            alert("Hubo un problema al guardar la informacion, intente mas tarde!");
+            dispatch(saveTeacher(false));
+            dispatch(saveTeacherRequest(false));
         });
     };
 };
@@ -427,7 +478,7 @@ export const getCandidates = payload => {
 export const getCandidateSelection = payload => {
     return dispatch => {
         dispatch(candidateSelectionRequest(true));
-        axios.get(`http://localhost:8080/nucleus/candidates/candidatesSelection`)
+        axios.get(`http://localhost:8080/nucleus/candidates/candidatesSelection/${localStorage.getItem("tokenAuth")}`)
         .then( ({data}) => {
             dispatch(candidateSelection(data));
             dispatch(candidateSelectionRequest(false));
@@ -439,15 +490,22 @@ export const getCandidateSelection = payload => {
     };
 };
 
+export const updateCandidatesSelected = payload => {
+    return dispatch => {
+        dispatch(candidateSelection(payload));
+    };
+};
+
 export const updateCandidateSelection = payload => {
     return dispatch => {
         dispatch(updateSelection(true));
-        axios.post(`http://localhost:8080/nucleus/candidates/updateCandidateSelection`, payload)
+        axios.post(`http://localhost:8080/nucleus/candidates/updateCandidateSelection/${localStorage.getItem("tokenAuth")}`, payload)
         .then( ({data}) => {
             dispatch(updateSelection(!data));
         })
         .catch( error => {
             console.log(error);
+            dispatch(updateSelection(false));
         })
     };
 };

@@ -25,6 +25,8 @@ const initialState = {
     addSubject: false,
     teacherInfo: {teacherName: "", teacherLastNameFather:"", teacherLastNameMother:"", teacherRFC:"", teacherGenre:"" ,idInstitute:{instituteName:""}, specialities:[], subjects: []},
     teacherSearchRequest: false,
+    saveTeacherRequest: false,
+    updateTeacherRequest: false,
     candidatesData: [],
     updateCandidatesSelection: false
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
-import { getCandidates, getCandidateSelection, updateCandidateSelection } from '../../../actions';
+import { getCandidates, getCandidateSelection, updateCandidateSelection, updateCandidatesSelected } from '../../../actions';
 import ProgressComponent from '../../Util/CircularProgress';
 import Button from '@material-ui/core/Button';
 import DroppableDetailed from '../../Util/Droppable';
@@ -370,6 +370,7 @@ class CandidatesManagement extends Component {
     }
 
     saveCandidateSelection(){
+        this.props.updateSelection(this.state);
         this.props.updateCandidatesSelection(this.state);
     }
         
@@ -416,7 +417,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     getCandidates: () => dispatch(getCandidates()),
     getCandidateSelection: () => dispatch(getCandidateSelection()),
-    updateCandidatesSelection: value => dispatch(updateCandidateSelection(value))
+    updateCandidatesSelection: value => dispatch(updateCandidateSelection(value)),
+    updateSelection: value => dispatch(updateCandidatesSelected(value))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CandidatesManagement);

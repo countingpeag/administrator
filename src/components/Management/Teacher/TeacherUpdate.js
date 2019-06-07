@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import TeacherSpecialtyAggregations from './TeacherSpecialtyAggregations';
 import TeacherSubjectAggregations from './TeacherSubjectAggregations';
+import ProgressComponent from './../../Util/CircularProgress';
 
 class TeacherUpdate extends Component{
 
@@ -92,7 +93,6 @@ class TeacherUpdate extends Component{
     }
 
     componentWillReceiveProps(props){
-        console.log(props.teacherInfo)
         this.setState({
             updateName: props.teacherInfo.teacherName,
             updateLastnameFather: props.teacherInfo.teacherLastNameFather,
@@ -105,7 +105,7 @@ class TeacherUpdate extends Component{
     }
 
     render(){
-        const { teacherInfo, schoolData, teacherRequest } = this.props;
+        const { teacherInfo, schoolData, teacherRequest, updateTeacherRequest } = this.props;
         const { specialitiesToUpdate, subjectsToUpdate, updateName, updateLastnameFather, updateLastnameMother, updateRFC, updateInstitute } = this.state;
         return(
             <Grid>
@@ -172,10 +172,11 @@ class TeacherUpdate extends Component{
                             <TeacherSpecialtyAggregations specialities={specialitiesToUpdate} allSpecialities={schoolData.specialities} addSpecialty={this.handleAdd} removeSpecialty={this.handleRemove} />
                             <TeacherSubjectAggregations subjects={subjectsToUpdate} allSubjects={schoolData.subjects} addSubject={this.handleAdd} removeSubject={this.handleRemove} />
                         </Row>
-                        <Row center="xs">
-                            <Button variant="contained" color="secondary" onClick={this.handleSubmit} disabled={!teacherRequest}>
+                        <Row center="xs" className="progressButton">
+                            <Button variant="contained" color="secondary" onClick={this.handleSubmit} disabled={!teacherRequest || updateTeacherRequest}>
                                     Guardar
                             </Button>
+                            { updateTeacherRequest && <ProgressComponent size={24} />}
                         </Row>
                     </Col>
                 </Row>
@@ -186,7 +187,8 @@ class TeacherUpdate extends Component{
 
 const mapStateToProps = state => ({
     schoolData: state.StatisticsformData,
-    teacherRequest: state.teacherSearchRequest
+    teacherRequest: state.teacherSearchRequest,
+    updateTeacherRequest: state.updateTeacherRequest,
 });
 
 export default connect(mapStateToProps,null)(TeacherUpdate);

@@ -140,7 +140,7 @@ class SubjectManagement extends Component{
                             </h3>
                             <div className="updateSubject">
                                 <Button  variant="contained" color="secondary" onClick={() => this.updateSubject(subjectInfo)} disabled={subjectInfo.subjectKeyCode===undefined || updateState===true? true : false}>Guardar</Button>
-                                { updateState && <ProgressComponent size={24} />} 
+                                { updateState && <ProgressComponent size={24} /> } 
                             </div>
                         </div>
                     </Col>
@@ -188,6 +188,7 @@ class SubjectManagement extends Component{
                         </ul>
                         <div className="saveSubject">
                             <Button  variant="contained" color="primary" onClick={this.addSubject} disabled={addState===true || subjects.length<=0 ?true:false}>Guardar</Button>
+                            { addState && <ProgressComponent size={24} /> } 
                         </div>
                     </Col>
                 </Row>

@@ -8,7 +8,7 @@ import { fileResponse, fileRequest } from './Files';
 import { validationStudentsData, validationOptionsData, sentStudentsValidation, searchStudentsValidation} from './Validation';
 import { searchStudent, studentInfo, deleteStudent, deleteResponse } from './Students';
 import { searchSubject, subjectInfo, updateSubject, updateSubjectResponse, addSubject, addSubjectResponse } from './Subjects';
-import { teacherInfo, updateTeacher, teacherSearchRequest } from './TeacherReducer';
+import { teacherInfo, teacherSearchRequest, teacherUpdated, updateTeacherRequest, teacherSaved, saveTeacherRequest } from './TeacherReducer';
 import { candidatesData, candidateSelectionRequest, candidatesSelected, updateCandidatesSelection} from './CandidatesReducer';
 
 export default combineReducers({
@@ -42,7 +42,10 @@ export default combineReducers({
     addSubjectResponse,
     teacherInfo,
     teacherSearchRequest,
-    updateTeacher,
+    teacherUpdated,
+    updateTeacherRequest,
+    teacherSaved,
+    saveTeacherRequest,
     candidatesData,
     candidatesSelected,
     candidateSelectionRequest,
