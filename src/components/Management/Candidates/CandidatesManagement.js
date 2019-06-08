@@ -44,14 +44,14 @@ const getItemStyle = (isDragging, draggableStyle) => ({
     margin: `0 0 ${grid}px 0`,
 
     // change background colour if dragging
-    background: isDragging ? 'lightgreen' : 'grey',
+    background: isDragging ? '#728EE6' : '#426AE5',
 
     // styles we need to apply on draggables
     ...draggableStyle
 });
 
 const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightblue' : 'lightgrey',
+    background: isDraggingOver ? '#C0C2FF' : '#9EA1FF',
     padding: grid,
     width: 250
 });
@@ -94,6 +94,9 @@ class CandidatesManagement extends Component {
     getList = id => this.state[this.id2List[id]];
 
     onDragEnd = result => {
+        const { morningElectronica, morningClinico, morningQuimico, morningAutomotriz,
+            afternoonElectronica, afternoonClinico, afternoonQuimico, afternoonAutomotriz, } = this.state;
+        const MAXSIZE = 50;
         const { source, destination } = result;
         console.log(source, "<-->", destination);
         // dropped outside the list
@@ -144,78 +147,80 @@ class CandidatesManagement extends Component {
                 destination
             );
 
-            if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="morningElectronica") || (source.droppableId==="morningElectronica" && destination.droppableId==="candidatesNotSelected")){
-                this.setState({
-                    candidatesNotSelected: result.candidatesNotSelected,
-                    morningElectronica: result.morningElectronica
-                });
+            if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="morningElectronica" && morningElectronica.length<MAXSIZE) || (source.droppableId==="morningElectronica" && destination.droppableId==="candidatesNotSelected")){
+                    this.setState({
+                        candidatesNotSelected: result.candidatesNotSelected,
+                        morningElectronica: result.morningElectronica
+                    });
             }
-            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="morningClinico") || (source.droppableId==="morningClinico" && destination.droppableId==="candidatesNotSelected")){
+            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="morningClinico" && morningClinico.length<MAXSIZE) || (source.droppableId==="morningClinico" && destination.droppableId==="candidatesNotSelected")){
                 this.setState({
                     candidatesNotSelected: result.candidatesNotSelected,
                     morningClinico: result.morningClinico
                 });
             }
-            else if( (source.droppableId==="candidatesNotSelected" && destination.droppableId==="morningQuimico") || (source.droppableId==="morningQuimico" && destination.droppableId==="candidatesNotSelected")) {
+            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="morningQuimico" && morningQuimico.length<MAXSIZE) || (source.droppableId==="morningQuimico" && destination.droppableId==="candidatesNotSelected")) {
                 this.setState({
                     candidatesNotSelected: result.candidatesNotSelected,
                     morningQuimico: result.morningQuimico
                 });
             }
-            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="morningAutomotriz") || (source.droppableId==="morningAutomotriz" && destination.droppableId==="candidatesNotSelected")){
+            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="morningAutomotriz" && morningAutomotriz.length<MAXSIZE) || (source.droppableId==="morningAutomotriz" && destination.droppableId==="candidatesNotSelected")){
                 this.setState({
                     candidatesNotSelected: result.candidatesNotSelected,
                     morningAutomotriz: result.morningAutomotriz
                 });
             }
-            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="afternoonElectronica") || (source.droppableId==="afternoonElectronica" && destination.droppableId==="candidatesNotSelected")){
+            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="afternoonElectronica" && afternoonElectronica.length<MAXSIZE) || (source.droppableId==="afternoonElectronica" && destination.droppableId==="candidatesNotSelected")){
                 this.setState({
                     candidatesNotSelected: result.candidatesNotSelected,
                     afternoonElectronica: result.afternoonElectronica
                 });
             }
-            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="afternoonClinico") || (source.droppableId==="afternoonClinico" && destination.droppableId==="candidatesNotSelected")){
+            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="afternoonClinico" && afternoonClinico.length<MAXSIZE) || (source.droppableId==="afternoonClinico" && destination.droppableId==="candidatesNotSelected")){
                 this.setState({
                     candidatesNotSelected: result.candidatesNotSelected,
                     afternoonClinico: result.afternoonClinico
                 });
             }
-            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="afternoonQuimico") || (source.droppableId==="afternoonQuimico" && destination.droppableId==="candidatesNotSelected")){
+            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="afternoonQuimico" && afternoonQuimico.length<MAXSIZE) || (source.droppableId==="afternoonQuimico" && destination.droppableId==="candidatesNotSelected")){
                 this.setState({
                     candidatesNotSelected: result.candidatesNotSelected,
                     afternoonQuimico: result.afternoonQuimico
                 });
             }
-            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="afternoonAutomotriz") || (source.droppableId==="afternoonAutomotriz" && destination.droppableId==="candidatesNotSelected")){
+            else if((source.droppableId==="candidatesNotSelected" && destination.droppableId==="afternoonAutomotriz" && afternoonAutomotriz.length<MAXSIZE) || (source.droppableId==="afternoonAutomotriz" && destination.droppableId==="candidatesNotSelected")){
                 this.setState({
                     candidatesNotSelected: result.candidatesNotSelected,
                     afternoonAutomotriz: result.afternoonAutomotriz
                 });
             }
-            else if((source.droppableId==="morningElectronica" && destination.droppableId==="afternoonElectronica") || (source.droppableId==="afternoonElectronica" && destination.droppableId==="morningElectronica")){
+            else if((source.droppableId==="morningElectronica" && destination.droppableId==="afternoonElectronica" && afternoonElectronica.length<MAXSIZE) || (source.droppableId==="afternoonElectronica" && destination.droppableId==="morningElectronica" && morningElectronica.length<MAXSIZE)){
                 this.setState({
                     morningElectronica: result.morningElectronica,
                     afternoonElectronica: result.afternoonElectronica
                 });
             }
-            else if((source.droppableId==="morningClinico" && destination.droppableId==="afternoonClinico") || (source.droppableId==="afternoonClinico" && destination.droppableId==="morningClinico")){
+            else if((source.droppableId==="morningClinico" && destination.droppableId==="afternoonClinico" && afternoonClinico.length<MAXSIZE) || (source.droppableId==="afternoonClinico" && destination.droppableId==="morningClinico" && morningClinico.length<MAXSIZE)){
                 this.setState({
                     morningClinico: result.morningClinico,
                     afternoonClinico: result.afternoonClinico
                 });
             }
-            else if((source.droppableId==="morningQuimico" && destination.droppableId==="afternoonQuimico") || (source.droppableId==="afternoonQuimico" && destination.droppableId==="morningQuimico")){
+            else if((source.droppableId==="morningQuimico" && destination.droppableId==="afternoonQuimico" && afternoonQuimico.length<MAXSIZE) || (source.droppableId==="afternoonQuimico" && destination.droppableId==="morningQuimico" && morningQuimico.length<MAXSIZE)){
                 this.setState({
                     morningQuimico: result.morningQuimico,
                     afternoonQuimico: result.afternoonQuimico
                 });
             }
-            else if((source.droppableId==="morningAutomotriz" && destination.droppableId==="afternoonAutomotriz") || (source.droppableId==="afternoonAutomotriz" && destination.droppableId==="morningAutomotriz")){
+            else if((source.droppableId==="morningAutomotriz" && destination.droppableId==="afternoonAutomotriz" && afternoonAutomotriz.length<MAXSIZE) || (source.droppableId==="afternoonAutomotriz" && destination.droppableId==="morningAutomotriz" && morningAutomotriz.length<MAXSIZE)){
                 this.setState({
                     morningAutomotriz: result.morningAutomotriz,
                     afternoonAutomotriz: result.afternoonAutomotriz
                 });
             }
+            else
+                alert("La especialidad se ha llenado.");
         }
     };
 
@@ -239,13 +244,15 @@ class CandidatesManagement extends Component {
         const { morningElectronica, morningClinico, morningQuimico, morningAutomotriz, afternoonElectronica,
                 afternoonClinico, afternoonQuimico, afternoonAutomotriz, } = this.state;
 
+        var currentDate = new Date();
+        
         const columns = [
         {title: "ID", dataKey: "id"},
         {title: "Nombre", dataKey: "name"},
         {title: "Apellidos", dataKey: "lastname"},
         {title: "Edad", dataKey: "age"},
         {title: "Calificacion", dataKey: "score"},
-        {title: "turno", dataKey: "shift"}
+        {title: "Turno", dataKey: "shift"}
         ];
 
         const electronica1 = this.convertDataToObject(morningElectronica);
@@ -263,10 +270,12 @@ class CandidatesManagement extends Component {
                 columnStyles: {
                 id: {fillColor: 255}
             },
-            margin: {top: 60},
+            margin: {top: 125},
             didDrawPage: function(data) {
-                doc.text("ELECTRÓNICA", 40, 30);
-                doc.text("Matutino", 470, 30);
+                doc.text("DICTAMEN DE ADMITIDOS", 200, 60);
+                doc.text(`Fecha: ${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`, 440, 80);
+                doc.text("ELECTRÓNICA", 40, 105);
+                doc.text("Matutino", 470, 105);
             }
         });
         doc.addPage();
@@ -275,10 +284,12 @@ class CandidatesManagement extends Component {
                 columnStyles: {
                 id: {fillColor: 255}
             },
-            margin: {top: 60},
-            didDrawPage : function(data) {
-                doc.text("LABORATORIO CLÍNICO", 40, 30);
-                doc.text("Matutino", 470, 30);
+            margin: {top: 125},
+            didDrawPage: function(data) {
+                doc.text("DICTAMEN DE ADMITIDOS", 200, 60);
+                doc.text(`Fecha: ${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`, 440, 80);
+                doc.text("LABORATORIO CLÍNICO", 40, 105);
+                doc.text("Matutino", 470, 105);
             }
         });
         doc.addPage();
@@ -287,10 +298,12 @@ class CandidatesManagement extends Component {
                 columnStyles: {
                 id: {fillColor: 255}
             },
-            margin: {top: 60},
+            margin: {top: 125},
             didDrawPage: function(data) {
-                doc.text("LABORATORISTA QUÍMICO", 40, 30);
-                doc.text("Matutino", 470, 30);
+                doc.text("DICTAMEN DE ADMITIDOS", 200, 60);
+                doc.text(`Fecha: ${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`, 440, 80);
+                doc.text("LABORATORISTA QUÍMICO", 40, 105);
+                doc.text("Matutino", 470, 105);
             }
         });
         doc.addPage();
@@ -299,10 +312,12 @@ class CandidatesManagement extends Component {
                 columnStyles: {
                 id: {fillColor: 255}
             },
-            margin: {top: 60},
+            margin: {top: 125},
             didDrawPage: function(data) {
-                doc.text("MANTENIMIENTO AUTOMOTRIZ", 40, 30);
-                doc.text("Matutino", 470, 30);
+                doc.text("DICTAMEN DE ADMITIDOS", 200, 60);
+                doc.text(`Fecha: ${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`, 440, 80);
+                doc.text("MANTENIMIENTO AUTOMOTRIZ", 40, 105);
+                doc.text("Matutino", 470, 105);
             }
         });
 
@@ -312,10 +327,12 @@ class CandidatesManagement extends Component {
                 columnStyles: {
                 id: {fillColor: 255}
             },
-            margin: {top: 60},
+            margin: {top: 125},
             didDrawPage: function(data) {
-                doc.text("ELECTRÓNICA", 40, 30);
-                doc.text("Vespertino", 470, 30);
+                doc.text("DICTAMEN DE ADMITIDOS", 200, 60);
+                doc.text(`Fecha: ${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`, 440, 80);
+                doc.text("ELECTRÓNICA", 40, 105);
+                doc.text("Vespertino", 470, 105);
             }
         });
         doc.addPage();
@@ -324,10 +341,12 @@ class CandidatesManagement extends Component {
                 columnStyles: {
                 id: {fillColor: 255}
             },
-            margin: {top: 60},
+            margin: {top: 125},
             didDrawPage: function(data) {
-                doc.text("LABORATORIO CLÍNICO", 40, 30);
-                doc.text("Vespertino", 470, 30);
+                doc.text("DICTAMEN DE ADMITIDOS", 200, 60);
+                doc.text(`Fecha: ${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`, 440, 80);
+                doc.text("LABORATORIO CLÍNICO", 40, 105);
+                doc.text("Vespertino", 470, 105);
             }
         });
 
@@ -337,10 +356,12 @@ class CandidatesManagement extends Component {
                 columnStyles: {
                 id: {fillColor: 255}
             },
-            margin: {top: 60},
+            margin: {top: 125},
             didDrawPage: function(data) {
-                doc.text("LABORATORISTA QUÍMICO", 40, 30);
-                doc.text("Vespertino", 470, 30);
+                doc.text("DICTAMEN DE ADMITIDOS", 200, 60);
+                doc.text(`Fecha: ${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`, 440, 80);
+                doc.text("LABORATORISTA QUÍMICO", 40, 105);
+                doc.text("Vespertino", 470, 105);
             }
         });
         doc.addPage();
@@ -349,14 +370,16 @@ class CandidatesManagement extends Component {
                 columnStyles: {
                 id: {fillColor: 255}
             },
-            margin: {top: 60},
+            margin: {top: 125},
             didDrawPage: function(data) {
-                doc.text("MANTENIMIENTO AUTOMOTRIZ", 40, 30);
-                doc.text("Vespertino", 470, 30);
+                doc.text("DICTAMEN DE ADMITIDOS", 200, 60);
+                doc.text(`Fecha: ${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`, 440, 80);
+                doc.text("MANTENIMIENTO AUTOMOTRIZ", 40, 105);
+                doc.text("Vespertino", 470, 105);
             }
         });
 
-        doc.save('test.pdf');
+        doc.save('Aspirantes admitidos.pdf');
     }                       
 
     componentDidMount(){
@@ -384,7 +407,7 @@ class CandidatesManagement extends Component {
                                 <DownloadCandidates data={this.props.candidatesData}/>
                             </Row>
                             <Row center="xs">
-                                <Col xs={12} id="limitTen">
+                                <Col xs={12}>
                                     <DroppableDetailed getItemStyle={getItemStyle} getListStyle={getListStyle} items={this.state.candidatesNotSelected} droppableId="candidatesNotSelected" />
                                 </Col>
                             </Row>
