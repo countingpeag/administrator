@@ -96,7 +96,7 @@ class CandidatesManagement extends Component {
     onDragEnd = result => {
         const { morningElectronica, morningClinico, morningQuimico, morningAutomotriz,
             afternoonElectronica, afternoonClinico, afternoonQuimico, afternoonAutomotriz, } = this.state;
-        const MAXSIZE = 50;
+        const MAXSIZE = 5;
         const { source, destination } = result;
         console.log(source, "<-->", destination);
         // dropped outside the list

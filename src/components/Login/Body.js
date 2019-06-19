@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { Redirect } from 'react-router-dom';
-import Unauthorized from './Unauthorized'
+import Unauthorized from './Unauthorized';
 import { connect } from 'react-redux';
 import '../../styles/LoginStyle.css';
 

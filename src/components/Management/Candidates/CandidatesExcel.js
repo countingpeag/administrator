@@ -16,6 +16,7 @@ class DownloadCandidates extends Component {
         };        
     }
     componentWillReceiveProps(props){
+        console.log(props.data)
         let dataModified = props.data.map( candidate => {
             return {
                 candidateName: candidate.candidateName,
@@ -51,6 +52,7 @@ class DownloadCandidates extends Component {
                 candidateSchoolRegime: candidate.candidateSchoolRegime,
                 candidateSchoolKey: candidate.candidateSchoolKey,
                 candidateEndDate: new Date(candidate.candidateEndDate),
+                candidateSpecialySelected: candidate.specialty.specialityName,
         
                 insuranceNumber: candidate.health.insuranceNumber,
                 healthCandidateHeight: candidate.health.healthCandidateHeight,
@@ -62,13 +64,29 @@ class DownloadCandidates extends Component {
                 healthSmokingFlag: candidate.health.healthSmokingFlag==='1'?"Si":"No",
                 healthLaterality: candidate.health.healthLaterality,
         
+                economyIncome: candidate.economy.income,
+                economyFeeding: candidate.economy.feeding,
+                economyRent: candidate.economy.rent,
+                economyLight: candidate.economy.light,
+                economyGas: candidate.economy.gas,
+                economyTuition: candidate.economy.tuition,
+                economyBills: candidate.economy.bills,
+                economyTransport: candidate.economy.transport,
+                economyClothing: candidate.economy.clothing,
+                economyOthersOut: candidate.economy.othersOut,
+                economyTotalOut: candidate.economy.totalOut,
+                economyFather: candidate.economy.father,
+                economyMother: candidate.economy.mother,
+                economySiblings: candidate.economy.siblings,
+                economyOthersIn: candidate.economy.othersIn,
+                economyTotalIn: candidate.economy.totalIn,
+                economyFixedIncome: candidate.economy.fixedIncome,
+                economyComments: candidate.economy.comments, 
+
                 preferencesScholarshipFlag: candidate.preference.preferencesScholarshipFlag==='1'?"Si":"No",
                 preferencesShiftWished: candidate.preference.preferencesShiftWished,
                 preferencesWayToKnow: candidate.preference.preferencesWayToKnow,
                 preferencesSpecialtyWhished1: candidate.preference.preferencesSpecialtyWhished1,
-                preferencesSpecialtyWhished2: candidate.preference.preferencesSpecialtyWhished2,
-                preferencesSpecialtyWhished3: candidate.preference.preferencesSpecialtyWhished3,
-                preferencesSpecialtyWhished4: candidate.preference.preferencesSpecialtyWhished4,
         
                 finalScore: candidate.candidateScore
             };
@@ -126,16 +144,32 @@ class DownloadCandidates extends Component {
                     <ExcelColumn label="Fuma" value="healthSmokingFlag"/>
                     <ExcelColumn label="Lateralidad" value="healthLaterality"/>
 
-
+                    <ExcelColumn label="Ingreso mensual" value="economyIncome"/>
+                    <ExcelColumn label="Alimentacion" value="economyFeeding"/>
+                    <ExcelColumn label="Renta" value="economyRent"/>
+                    <ExcelColumn label="Luz" value="economyLight"/>
+                    <ExcelColumn label="Gas" value="economyGas"/>
+                    <ExcelColumn label="Colegiaturas" value="economyTuition"/>
+                    <ExcelColumn label="Abonos" value="economyBills"/>
+                    <ExcelColumn label="Transporte" value="economyTransport"/>
+                    <ExcelColumn label="Vestimenta" value="economyClothing"/>
+                    <ExcelColumn label="Otros" value="economyOthersOut"/>
+                    <ExcelColumn label="Total" value="economyTotalOut"/>
+                    <ExcelColumn label="Padre" value="economyFather"/>
+                    <ExcelColumn label="Madre" value="economyMother"/>
+                    <ExcelColumn label="Hermanos" value="economySiblings"/>
+                    <ExcelColumn label="Otros" value="economyOthersIn"/>
+                    <ExcelColumn label="Total" value="economyTotalIn"/>
+                    <ExcelColumn label="¿Ingresos fijos?" value="economyFixedIncome"/>
+                    <ExcelColumn label="Comentarios" value="economyComments"/>
+                    
                     <ExcelColumn label="Beca" value="preferencesScholarshipFlag"/>
                     <ExcelColumn label="Turno de preferencia" value="preferencesShiftWished"/>
                     <ExcelColumn label="Como se entero" value="preferencesWayToKnow"/>
-                    <ExcelColumn label="Especialidad 1" value="preferencesSpecialtyWhished1"/>
-                    <ExcelColumn label="Especialidad 2" value="preferencesSpecialtyWhished2"/>
-                    <ExcelColumn label="Especialidad 3" value="preferencesSpecialtyWhished3"/>
-                    <ExcelColumn label="Especialidad 4" value="preferencesSpecialtyWhished4"/>
-
+                    <ExcelColumn label="Especialidad Deseada" value="preferencesSpecialtyWhished1"/>
+                    
                     <ExcelColumn label="Calificacion Examen" value="finalScore"/>
+                    <ExcelColumn label="Especialidad Elegida" value="candidateSpecialySelected"/>
                 </ExcelSheet>
             </ExcelFile>
         );

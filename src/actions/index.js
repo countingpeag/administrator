@@ -7,6 +7,7 @@ export const WILL_CHANGE_PASSWORD = 'WILL_CHANGE_PASSWORD';
 
 export const willChangePassword = payload => ({type: WILL_CHANGE_PASSWORD, payload: payload});
 const changePassword = payload => ({type: CHANGED_PASSWORD, payload:payload});
+
 export const changedPassword = payload => {
     return dispatch => {
     
