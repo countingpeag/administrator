@@ -87,6 +87,9 @@ class DownloadCandidates extends Component {
                 preferencesShiftWished: candidate.preference.preferencesShiftWished,
                 preferencesWayToKnow: candidate.preference.preferencesWayToKnow,
                 preferencesSpecialtyWhished1: candidate.preference.preferencesSpecialtyWhished1,
+                preferencesSpecialtyWhished2: candidate.preference.preferencesSpecialtyWhished2,
+                preferencesSpecialtyWhished3: candidate.preference.preferencesSpecialtyWhished3,
+                preferencesSpecialtyWhished4: candidate.preference.preferencesSpecialtyWhished4,
         
                 finalScore: candidate.candidateScore
             };
@@ -166,7 +169,10 @@ class DownloadCandidates extends Component {
                     <ExcelColumn label="Beca" value="preferencesScholarshipFlag"/>
                     <ExcelColumn label="Turno de preferencia" value="preferencesShiftWished"/>
                     <ExcelColumn label="Como se entero" value="preferencesWayToKnow"/>
-                    <ExcelColumn label="Especialidad Deseada" value="preferencesSpecialtyWhished1"/>
+                    <ExcelColumn label="Especialidad 1" value="preferencesSpecialtyWhished1"/>
+                    <ExcelColumn label="Especialidad 2" value="preferencesSpecialtyWhished2"/>
+                    <ExcelColumn label="Especialidad 3" value="preferencesSpecialtyWhished3"/>
+                    <ExcelColumn label="Especialidad 4" value="preferencesSpecialtyWhished4"/>
                     
                     <ExcelColumn label="Calificacion Examen" value="finalScore"/>
                     <ExcelColumn label="Especialidad Elegida" value="candidateSpecialySelected"/>
