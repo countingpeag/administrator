@@ -63,9 +63,6 @@ class NavBar extends Component{
           case 'statistics':
             this.setState({option : id});
             break;
-          case 'validation':
-            this.setState({option : id});
-            break;
           case 'management':
             this.setState({option : id});
             break;
@@ -91,8 +88,6 @@ class NavBar extends Component{
             return <Redirect to={{pathname: '/file'}} />;
           case 'statistics':
             return <Redirect to={{pathname: '/statistics'}} />;
-          case 'validation':
-            return <Redirect to={{pathname: '/validation'}} />;
           case 'management':
             return <Redirect to={{pathname: '/management'}} />;
           case 'profile':
@@ -127,9 +122,6 @@ class NavBar extends Component{
           <MenuItem id="statistics" onClick={this.handleClick}>
             <p>Estadisticas</p>
           </MenuItem>
-          <MenuItem id="validation"  onClick={this.handleClick}>
-            <p>Validacion</p>
-          </MenuItem>
           <MenuItem id="management"  onClick={this.handleClick}>
             <p>Gestion</p>
           </MenuItem>
@@ -157,7 +149,6 @@ class NavBar extends Component{
                   <Button color="inherit" id="home" onClick={this.handleClick}>Inicio</Button>
                   <Button color="inherit" id="file" onClick={this.handleClick}>Cargar</Button>
                   <Button color="inherit" id="statistics" onClick={this.handleClick}>Estadisticas</Button>
-                  <Button color="inherit" id="validation"  onClick={this.handleClick}>Validacion</Button>
                   <Button color="inherit" id="management"  onClick={this.handleClick}>Gestion</Button>
                   <Button color="inherit" id="profile"  onClick={this.handleClick}>Perfil</Button>
                   <Button color="inherit" id="logout" onClick={this.handleClick}>Salir</Button>
