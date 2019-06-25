@@ -16,7 +16,6 @@ class DownloadCandidates extends Component {
         };        
     }
     componentWillReceiveProps(props){
-        console.log(props.data)
         let dataModified = props.data.map( candidate => {
             return {
                 candidateName: candidate.candidateName,

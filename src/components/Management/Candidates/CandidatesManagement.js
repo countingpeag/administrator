@@ -225,18 +225,33 @@ class CandidatesManagement extends Component {
     };
 
     convertDataToObject(array){
-        return array.map( candidate => {
-            const { idCandidate, candidateName, candidateLastNameFather, candidateLastNameMother, 
-                candidateAge, candidateScore, preference} = candidate;
+        var newArray = array.map( (candidate) => {
+            const { candidateName, candidateLastNameFather, candidateLastNameMother, 
+                candidateAge, candidateGroup, preference} = candidate;
                 return  {
-                    id: idCandidate,
                     name: candidateName,
-                    lastname: `${candidateLastNameFather} ${candidateLastNameMother}`,
+                    lastnameFather: candidateLastNameFather,
+                    lastnameMother: candidateLastNameMother,
                     age: candidateAge,
-                    score: candidateScore,
+                    group: candidateGroup,
                     shift: preference.preferencesShiftWished
                 };
         });
+        
+
+        //order by group
+        for(var i=0 ; i<newArray.length ; i++){
+            for(var j=i+1 ; j<newArray.length-1 ; j++){
+                if(newArray[j]!==newArray[j+1])
+                {
+                    var temp = newArray[j];
+                    newArray[j]=newArray[j+1];
+                    newArray[j+1]=temp;
+                }
+            }
+        }
+
+        return newArray;
     }
 
     downloadFile() {
@@ -247,11 +262,11 @@ class CandidatesManagement extends Component {
         var currentDate = new Date();
         
         const columns = [
-        {title: "ID", dataKey: "id"},
         {title: "Nombre", dataKey: "name"},
-        {title: "Apellidos", dataKey: "lastname"},
+        {title: "Apellido paterno", dataKey: "lastnameFather"},
+        {title: "Apellido materno", dataKey: "lastnameMother"},
         {title: "Edad", dataKey: "age"},
-        {title: "Calificacion", dataKey: "score"},
+        {title: "Grupo", dataKey: "group"},
         {title: "Turno", dataKey: "shift"}
         ];
 
