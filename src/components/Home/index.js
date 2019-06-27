@@ -26,8 +26,7 @@ class News extends Component {
         this.setState({news: newsArray});
     }
 
-    addNews(news){ 
-            console.log(news, "***");
+    addNews(news){
             let newsArray = this.state.news;
             let size = newsArray.length;
             if(size!==0)
