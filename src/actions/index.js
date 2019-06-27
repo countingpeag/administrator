@@ -151,7 +151,6 @@ export const deleteN = payload => {
 
 export const updateN = payload => {
     return dispatch => {
-        
         axios.post(`http://localhost:8080/nucleus/news/update/${localStorage.getItem('tokenAuth')}`, payload, { headers: { 'Content-Type': 'application/json;charset=UTF-8' } })
         .then(({data})=>{
             dispatch(update(data));

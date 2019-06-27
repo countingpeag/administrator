@@ -123,9 +123,8 @@ class Cards extends React.Component {
           { data.image.length>0
             ? <CardMedia
               className={classes.media}
-              /*image={require("../../images/test1.jpeg")}*/
-              image={data.image}
-              title="Love"
+              image={`${data.image}`}
+              title="nucleus"
               />
             :  null
           }

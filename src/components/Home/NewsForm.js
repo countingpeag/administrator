@@ -38,17 +38,17 @@ class NewsForm extends Component{
     }
 
     selectedIMGChangedHandler = (item,event) => {
-        const file = event.target.files[0]
-        this.setState({selectedFile: event.target.files[0]})
+        const file = event.target.files[0];
+        this.setState({selectedFile: event.target.files[0]});
         
-        let reader = new FileReader()
-        reader.readAsDataURL(file)
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
         reader.onload = () => {
-            item.image = reader.result
+            item.image = reader.result;
         };
         reader.onerror = function (error) {
         console.log('Error: ', error);
-        this.setState({img64: 'img error'})
+        this.setState({img64: 'img error'});
         }
     }
 
