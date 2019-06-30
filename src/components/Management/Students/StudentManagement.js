@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ProgressComponent from '../../Util/CircularProgress';
 import { getTuition, deleteStud } from '../../../actions'; 
+import { isNumber } from './../../Util/Validations';
 import '../../../styles/StudentsStyle.css';
 
 class StudentManagement extends Component{
@@ -21,7 +22,9 @@ class StudentManagement extends Component{
     }
 
     handleChange(event){
-        this.setState({tuition: event.target.value});
+        const { value } = event.target;
+        if(isNumber(value))
+            this.setState({tuition: value});
     }
 
     handleClick(){

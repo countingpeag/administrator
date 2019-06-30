@@ -7,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import decode from 'jwt-decode';
 import {Grid, Row, Col} from 'react-flexbox-grid';
+import { characterSize } from './../Util/Validations';
 import { connect } from 'react-redux';
 
 class ChangePassword extends React.Component {
@@ -28,10 +29,8 @@ class ChangePassword extends React.Component {
         rfc: adminObj.rfc
       }
 
-      if(oldPassword!=='' && newPassword!=='')
+      if(characterSize(oldPassword, 8, 12) && characterSize(newPassword, 8, 12))
         this.props.changed(obj);
-      else
-        alert("Complete los campos vacios.");
     }
 
     handleClickOpen = () => {

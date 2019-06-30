@@ -273,7 +273,7 @@ export const getTuition = payload => {
             if(data!=="")
                 dispatch(studentInfo(data));
             else
-                alert(`El estudiante (${payload.tuition}) no se encuentra.`);
+                alert(`El estudiante con matricula: ${payload.tuition} no se encontro.`);
 
             dispatch(searchStudent(false));
         })
@@ -287,9 +287,11 @@ export const getTuition = payload => {
 export const deleteStud = payload => {
     return dispatch => {
         dispatch(deleteStudent(true));
-
+        console.log(payload);
         axios.post(`http://localhost:8080/nucleus/admin/deleteStudent/${localStorage.getItem("tokenAuth")}`, payload)
         .then( ({data}) => {
+            if(data)
+                alert(`El estudiante con matricula ${payload.studentTuition} se ha eliminado correctamente.`);
             dispatch(deleteResponse(data));
             dispatch(deleteStudent(false));
         })

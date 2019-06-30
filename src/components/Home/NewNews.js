@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {Grid, Row, Col} from 'react-flexbox-grid';
+import { characterSize } from './../Util/Validations';
 import decode from 'jwt-decode';
 
 import '../../styles/HomeStyle.css';
@@ -78,14 +79,17 @@ class NewNews extends React.Component {
             administrator: adminObj 
         };
 
-        if(content!=='' && priotity!==''){
+        const min = 9;
+        const max = 401;
+
+        if(characterSize(content, min, max) && priotity!==''){
             this.props.addNews(objToUpdate);
             save(objToSend);
             
             this.setState({open: false});
         }
-        else
-            alert("Complete los campos vacios");
+        if(priotity==='')
+            alert("Seleccione prioridad.");
     }
     
     handleOpen(){

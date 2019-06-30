@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'; 
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import { characterSize } from './../../Util/Validations';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -100,10 +101,10 @@ class TeacherAppend extends Component{
             specialities
         };
 
-        if(specialities!=='' && subjects!=='' && teacherName!=='' && teacherLastnameFather!=='' && teacherLastnameMother!=='' && teacherUsername!=='' && teacherRFC!=='' && teacherGenre!=='')
-            this.props.saveTeacher(teacher);
-        else
-            alert("Complete los campos vacios.");
+        if(characterSize(teacherName, 3, 45) && characterSize(teacherLastnameFather, 3, 45) 
+            && characterSize(teacherLastnameMother, 3, 45) && characterSize(teacherRFC, 10, 21) 
+            && characterSize(teacherUsername, 3, 45) && teacherGenre!=='' && specialities!=='' && subjects!=='')
+                this.props.saveTeacher(teacher);
     }
 
     componentDidMount(){

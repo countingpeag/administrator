@@ -6,6 +6,7 @@ import Input from '@material-ui/core/Input';
 import ProgressComponent from '../../Util/CircularProgress';
 import { findSubject, updateSubject, addSubject } from '../../../actions';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import { characterSize, isNumber} from './../../Util/Validations';
 import { connect } from 'react-redux';
 import '../../../styles/SubjectStyle.css';
 
@@ -33,9 +34,11 @@ class SubjectManagement extends Component{
 
     updateSubject(subject){
         const { updateName, updateLevel } = this.state;
-        subject.subjectName=updateName;
-        subject.subjectLevel=Number(updateLevel);
-        this.props.update(subject);
+        if(characterSize(updateName ,3 ,45)){
+            subject.subjectName=updateName;
+            subject.subjectLevel=Number(updateLevel);
+            this.props.update(subject);
+        }
     }
 
     addSubject(){
@@ -44,7 +47,7 @@ class SubjectManagement extends Component{
 
     findSubject(){
         const { nameToFind } = this.state;
-        if(nameToFind.length>=4)
+        if(characterSize(nameToFind, 3, 45))
             this.props.find(nameToFind);
     }
 
@@ -56,7 +59,7 @@ class SubjectManagement extends Component{
     append(){
         const {subjectName, subjectLevel ,subjects, id} = this.state;
 
-        if(subjectName.length>=4 && subjectLevel!==""){
+        if(characterSize(subjectName, 3, 45) && subjectLevel!==""){
             let subject = {
                 subjectKeyCode: id,
                 subjectName: subjectName,
@@ -75,14 +78,14 @@ class SubjectManagement extends Component{
     handleChange(event){
         let {id, value} = event.target; 
         if(id==="name")
-            this.setState({subjectName:value});
+            this.setState({subjectName:value.trim()});
         else if(id==="nameFind")
-            this.setState({nameToFind:value});
-        else if(id==="level")
-            this.setState({subjectLevel:value});
+            this.setState({nameToFind:value.trim()});
+        else if(id==="level" && isNumber(value))
+            this.setState({subjectLevel:value.trim()});
         else if(id==="updateName")
             this.setState({updateName:value.trim()});
-        else if(id==="updateLevel")
+        else if(id==="updateLevel" && isNumber(value))
             this.setState({updateLevel:value.trim()});
     }
 

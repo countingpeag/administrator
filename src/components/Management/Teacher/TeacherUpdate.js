@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import { characterSize } from './../../Util/Validations';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -77,19 +78,23 @@ class TeacherUpdate extends Component{
     handleSubmit(){
         const { updateName, updateLastnameFather, updateLastnameMother, updateRFC, updateInstitute, specialitiesToUpdate, subjectsToUpdate } = this.state;
         const { updateTecher, teacherInfo} = this.props;
-        teacherInfo.teacherName = updateName;
-        teacherInfo.teacherLastNameFather = updateLastnameFather;
-        teacherInfo.teacherLastNameMother = updateLastnameMother;
-        teacherInfo.teacherRFC = updateRFC;
-        teacherInfo.idInstitute.instituteName = updateInstitute;
-        teacherInfo.specialities = specialitiesToUpdate;
-        teacherInfo.subjects = subjectsToUpdate
+        if(characterSize(updateName, 3, 45) && characterSize(updateLastnameFather, 3, 45) 
+            && characterSize(updateLastnameMother, 3, 45) && characterSize(updateRFC, 10, 21)){
+            teacherInfo.teacherName = updateName;
+            teacherInfo.teacherLastNameFather = updateLastnameFather;
+            teacherInfo.teacherLastNameMother = updateLastnameMother;
+            teacherInfo.teacherRFC = updateRFC;
+            teacherInfo.idInstitute.instituteName = updateInstitute;
+            teacherInfo.specialities = specialitiesToUpdate;
+            teacherInfo.subjects = subjectsToUpdate
 
-        updateTecher(teacherInfo);
+            updateTecher(teacherInfo);
+        }
     }
 
     handleSearch(){
-        this.props.searchTeacher(this.state.rfcToSearch.trim());
+        if(characterSize(this.state.rfcToSearch.trim(), 10, 21))
+            this.props.searchTeacher(this.state.rfcToSearch.trim());
     }
 
     componentWillReceiveProps(props){
