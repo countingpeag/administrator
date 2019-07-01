@@ -3,7 +3,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import BodyContainer from '../../containers/LoginContariner';
 import ProgressCompoenent from '../Util/ProgressComponent';
 import { connect } from 'react-redux';
-import logoNucleus from '../../images/logoTest.png';
+import logoNucleus from '../../images/nucleus.png';
 import '../../styles/LoginStyle.css';
 
 class Login extends Component{

@@ -5,6 +5,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Book from '@material-ui/icons/Book';
 import School from '@material-ui/icons/School';
+import People from '@material-ui/icons/People';
+import Work from '@material-ui/icons/Work';
 import { withStyles } from '@material-ui/core/styles';
 import StudentManagement from './Students/StudentManagement';
 import SubjectManagement from './Subjects/SubjectManagement';
@@ -52,8 +54,8 @@ class Management extends Component {
                             >
                                 <Tab label="Alumnos" icon={<School />} />
                                 <Tab label="Materias" icon={<Book />} />
-                                <Tab label="Maestros" icon={<Book />} />
-                                <Tab label="Aspirantes" icon={<Book />} />
+                                <Tab label="Maestros" icon={<Work />} />
+                                <Tab label="Aspirantes" icon={<People />} />
                             </Tabs>
                         </AppBar>
                         {value === 0 && <StudentManagement />}
